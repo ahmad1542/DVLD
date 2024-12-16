@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="ApplicationType.cs" />
     <Compile Include="clsDetainedLicense.cs" />
     <Compile Include="clsDriver.cs" />
     <Compile Include="clsInternationalLicense.cs" />
@@ -49,13 +51,17 @@
     <Compile Include="clsTest.cs" />
     <Compile Include="clsTestType.cs" />
     <Compile Include="clsLocalDrivingLicenseApplicationData.cs" />
-    <Compile Include="LicenseClass.cs" />
+    <Compile Include="CountryData.cs" />
+    <Compile Include="DataAccessSettings.cs" />
+    <Compile Include="clsLicenseClassData.cs" />
     <Compile Include="clsApplication.cs" />
-    <Compile Include="ApplicationType.cs" />
+    <Compile Include="clsApplicationType.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="clsPersonData.cs" />
     <Compile Include="clsCountryData.cs" />
+    <Compile Include="DetainedLicense.cs" />
+    <Compile Include="Driver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

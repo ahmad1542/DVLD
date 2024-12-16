@@ -394,7 +394,7 @@ namespace DVLD_DataAccess
 
 
             return IsDetained;
-            ;
+            
 
         }
 
