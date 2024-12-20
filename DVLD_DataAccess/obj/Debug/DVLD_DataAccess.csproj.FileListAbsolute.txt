@@ -14,3 +14,5 @@ D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.Ass
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.CoreCompileInputs.cache
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.dll
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.pdb
+D:\GitHub Repositories\DVLD\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll
+D:\GitHub Repositories\DVLD\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.pdb

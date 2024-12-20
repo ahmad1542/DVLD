@@ -1,14 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\GitHub Repositories\\DVLD\\DVLD\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{C1BE28AD-D036-4C77-964C-9EE4ACC6727A}|..\\DVLD_DataAccess\\DVLD_DataAccess.csproj|d:\\github repositories\\dvld\\dvld_dataaccess\\localdrivinglicenseapplicationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1BE28AD-D036-4C77-964C-9EE4ACC6727A}|..\\DVLD_DataAccess\\DVLD_DataAccess.csproj|d:\\github repositories\\dvld\\dvld_dataaccess\\clslocaldrivinglicenseapplicationdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -16,34 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LocalDrivingLicenseApplicationData.cs",
-              "DocumentMoniker": "D:\\GitHub Repositories\\DVLD\\DVLD_DataAccess\\LocalDrivingLicenseApplicationData.cs",
-              "RelativeDocumentMoniker": "..\\DVLD_DataAccess\\LocalDrivingLicenseApplicationData.cs",
-              "ToolTip": "D:\\GitHub Repositories\\DVLD\\DVLD_DataAccess\\LocalDrivingLicenseApplicationData.cs",
-              "RelativeToolTip": "..\\DVLD_DataAccess\\LocalDrivingLicenseApplicationData.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAowDUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T18:37:57.828Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "clsLocalDrivingLicenseApplicationData.cs",
-              "DocumentMoniker": "D:\\GitHub Repositories\\DVLD\\DVLD_DataAccess\\clsLocalDrivingLicenseApplicationData.cs",
-              "RelativeDocumentMoniker": "..\\DVLD_DataAccess\\clsLocalDrivingLicenseApplicationData.cs",
-              "ToolTip": "D:\\GitHub Repositories\\DVLD\\DVLD_DataAccess\\clsLocalDrivingLicenseApplicationData.cs",
-              "RelativeToolTip": "..\\DVLD_DataAccess\\clsLocalDrivingLicenseApplicationData.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAN0AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T18:37:38.45Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
