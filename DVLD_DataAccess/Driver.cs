@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    internal class Driver {
+    public class Driver {
 
         public static bool GetDriverInfoByDriverID(int DriverID,
             ref int PersonID, ref int CreatedByUserID, ref DateTime CreatedDate) {

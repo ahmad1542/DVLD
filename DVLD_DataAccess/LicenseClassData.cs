@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    internal class LicenseClassData {
+    public class LicenseClassData {
         public static bool GetLicenseClassInfoByID(int LicenseClassID,
             ref string ClassName, ref string ClassDescription, ref byte MinimumAllowedAge,
             ref byte DefaultValidityLength, ref float ClassFees) {

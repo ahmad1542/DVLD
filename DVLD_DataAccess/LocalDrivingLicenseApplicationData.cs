@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    internal class LocalDrivingLicenseApplicationData {
+    public class LocalDrivingLicenseApplicationData {
 
         public static bool GetLocalDrivingLicenseApplicationInfoByID(
             int LocalDrivingLicenseApplicationID, ref int ApplicationID,

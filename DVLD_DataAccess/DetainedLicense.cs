@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 
 namespace DVLD_DataAccess {
-    internal class DetainedLicense {
+    public class DetainedLicense {
 
         public static bool GetDetainedLicenseInfoByID(int DetainID,
             ref int LicenseID, ref DateTime DetainDate,

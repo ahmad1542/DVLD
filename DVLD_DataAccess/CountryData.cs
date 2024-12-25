@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.Design;
 
 namespace DVLD_DataAccess {
-    internal class CountryData {
+    public class CountryData {
 
         public enum enGendor { Male = 0, Female = 1 };
 

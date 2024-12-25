@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_DataAccess {
-    internal class ApplicationType {
+    public class ApplicationType {
 
         public static bool GetApplicationTypeInfoByID(int ApplicationTypeID,
             ref string ApplicationTypeTitle, ref float ApplicationFees) {

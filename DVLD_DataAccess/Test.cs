@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    internal class Test {
+    public class Test {
 
         public static bool GetTestInfoByID(int TestID,
             ref int TestAppointmentID, ref bool TestResult, ref string Notes, ref int CreatedByUserID) {

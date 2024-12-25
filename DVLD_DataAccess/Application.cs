@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    internal class Application {
+    public class Application {
 
         public static bool GetApplicationInfoByID(int ApplicationID,
             ref int ApplicantPersonID, ref DateTime ApplicationDate, ref int ApplicationTypeID,
