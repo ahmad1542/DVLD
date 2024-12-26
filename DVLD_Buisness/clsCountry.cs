@@ -1,32 +1,24 @@
-﻿using System;
+﻿using DVLD_DataAccess;
 using System.Data;
-using DVLD_DataAccess;
 
-namespace DVLD_Buisness
-{
-    public class clsCountry
-    {
+namespace DVLD_Buisness {
+    public class clsCountry {
 
         public int ID { set; get; }
         public string CountryName { set; get; }
-   
-        public clsCountry()
 
-        {
+        public clsCountry() {
             this.ID = -1;
             this.CountryName = "";
 
         }
 
-        private clsCountry(int ID, string CountryName)
-
-        {
+        private clsCountry(int ID, string CountryName) {
             this.ID = ID;
             this.CountryName = CountryName;
         }
 
-        public static clsCountry Find(int ID)
-        {
+        public static clsCountry Find(int ID) {
             string CountryName = "";
 
             if (clsCountryData.GetCountryInfoByID(ID, ref CountryName))
@@ -37,12 +29,11 @@ namespace DVLD_Buisness
 
         }
 
-        public static clsCountry Find(string CountryName)
-        {
+        public static clsCountry Find(string CountryName) {
 
             int ID = -1;
-           
-            if (clsCountryData.GetCountryInfoByName(CountryName, ref ID ))
+
+            if (clsCountryData.GetCountryInfoByName(CountryName, ref ID))
 
                 return new clsCountry(ID, CountryName);
             else
@@ -50,8 +41,7 @@ namespace DVLD_Buisness
 
         }
 
-        public static DataTable GetAllCountries()
-        {
+        public static DataTable GetAllCountries() {
             return clsCountryData.GetAllCountries();
 
         }

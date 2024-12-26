@@ -10,9 +10,9 @@ C:\Users\USER\Dropbox\Personal\Advices\2021\19 - Full Real Project\Project\DVLD_
 C:\Users\USER\Dropbox\Personal\Advices\2021\19 - Full Real Project\Project\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.pdb
 C:\Users\USER\Dropbox\Personal\Advices\2021\19 - Full Real Project\Project\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll
 C:\Users\USER\Dropbox\Personal\Advices\2021\19 - Full Real Project\Project\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.pdb
+D:\GitHub Repositories\DVLD\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll
+D:\GitHub Repositories\DVLD\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.pdb
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.AssemblyReference.cache
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.CoreCompileInputs.cache
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.dll
 D:\GitHub Repositories\DVLD\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.pdb
-D:\GitHub Repositories\DVLD\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll
-D:\GitHub Repositories\DVLD\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.pdb

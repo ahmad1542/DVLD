@@ -10,8 +10,6 @@ using System.ComponentModel.Design;
 namespace DVLD_DataAccess {
     public class CountryData {
 
-        public enum enGendor { Male = 0, Female = 1 };
-
         public static bool GetCountryInfoByID(int ID, ref string CountryName) {
 
             bool isFound = false;
