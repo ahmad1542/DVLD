@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    public class InternationalLicense {
+    public class InternationalLicenseData {
 
         public static bool GetInternationalLicenseInfoByID(int InternationalLicenseID,
             ref int ApplicationID,

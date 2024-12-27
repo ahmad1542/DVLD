@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    public class TestType {
+    public class TestTypeData {
 
         public static bool GetTestTypeInfoByID(int TestTypeID,
             ref string TestTypeTitle, ref string TestTypeDescription, ref float TestTypeFees) {

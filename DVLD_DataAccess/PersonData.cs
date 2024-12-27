@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DVLD_DataAccess {
-    public class Person {
+    public class PersonData {
 
         public static bool GetPersonInfoByID(int PersonID, ref string FirstName, ref string SecondName,
           ref string ThirdName, ref string LastName, ref string NationalNo, ref DateTime DateOfBirth,
