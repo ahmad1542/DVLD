@@ -120,6 +120,29 @@ namespace DVLD_Buisness {
                 this.ApplicationTypeID, (byte)this.ApplicationStatus, this.LastStatusDate, this.PaidFees, this.CreatedByUserID);
         }
 
+        public bool Cancel() {
+            return ApplicationData.UpdateStatus(this.ApplicationID, 2);
+        }
+
+        public bool SetComplete() {
+            return ApplicationData.UpdateStatus(this.ApplicationID, 3);
+        }
+
+        public bool Save() {
+            switch (Mode) {
+                case enMode.AddNew:
+                    if (_AddNewApplication()) {
+
+                        Mode = enMode.Update;
+                        return true;
+                    } else
+                        return false;
+                case enMode.Update:
+                    return _UpdateApplication();
+            }
+            return false;
+        }
+
         public bool Delete() {
             return ApplicationData.DeleteApplication(this.ApplicationID);
         }
@@ -134,6 +157,18 @@ namespace DVLD_Buisness {
 
         public static int GetActiveApplicationIDForLicenseClass(int PersonID, Application.enApplicationType ApplicationTypeID, int LicenseClassID) {
             return ApplicationData.GetActiveApplicationIDForLicenseClass(PersonID, (int)ApplicationTypeID, LicenseClassID);
+        }
+
+        public int GetActiveApplicationID(Application.enApplicationType ApplicationTypeID) {
+            return GetActiveApplicationID(this.ApplicantPersonID, ApplicationTypeID);
+        }
+
+        public static bool DoesPersonHaveActiveApplication(int PersonID, int ApplicationTypeID) {
+            return ApplicationData.DoesPersonHaveActiveApplication(PersonID, ApplicationTypeID);
+        }
+
+        public bool DoesPersonHaveActiveApplication(int ApplicationTypeID) {
+            return DoesPersonHaveActiveApplication(this.ApplicantPersonID, ApplicationTypeID);
         }
 
     }

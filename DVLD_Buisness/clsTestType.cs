@@ -20,7 +20,7 @@ namespace DVLD_Buisness {
             Mode = enMode.AddNew;
 
         }
-
+        
         public clsTestType(clsTestType.enTestType ID, string TestTypeTitel, string Description, float TestTypeFees) {
             this.ID = ID;
             this.Title = TestTypeTitel;
