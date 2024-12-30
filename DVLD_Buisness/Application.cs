@@ -12,7 +12,7 @@ namespace DVLD_Buisness {
         public enum enMode { AddNew = 0, Update = 1 };
         public enum enApplicationType {
             NewDrivingLicense = 1, RenewDrivingLicense = 2, ReplaceLostDrivingLicense = 3,
-            ReplaceDamagedDrivingLicense = 4, ReleaseDetainedDrivingLicsense = 5, NewInternationalLicense = 6, RetakeTest = 7
+            ReplaceDamagedDrivingLicense = 4, ReleaseDetainedDrivingLicense = 5, NewInternationalLicense = 6, RetakeTest = 7
         };
         public enum enApplicationStatus { New = 1, Cancelled = 2, Completed = 3 };
 

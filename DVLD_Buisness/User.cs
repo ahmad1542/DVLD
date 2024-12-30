@@ -109,7 +109,6 @@ namespace DVLD_Buisness {
                     } else
                         return false;
 
-
                 case enMode.Update:
                     return _UpdateUser();
             }

@@ -58,6 +58,10 @@
     <Compile Include="clsUser.cs" />
     <Compile Include="clsPerson.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="DetainedLicense.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="InternationalLicense.cs" />
+    <Compile Include="License.cs" />
     <Compile Include="LicenseClass.cs" />
     <Compile Include="LocalDrivingLicenseApplication.cs" />
     <Compile Include="Person.cs" />
