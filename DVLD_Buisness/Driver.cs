@@ -23,6 +23,7 @@ namespace DVLD_Buisness {
 
             Mode = enMode.AddNew;
         }
+
         public Driver(int DriverID, int PersonID, int CreatedByUserID, DateTime CreatedDate) {
             this.DriverID = DriverID;
             this.PersonID = PersonID;
@@ -82,6 +83,13 @@ namespace DVLD_Buisness {
             return false;
         }
 
+        public static DataTable GetLicenses(int DriverID) {
+            return License.GetDriverLicenses(DriverID);
+        }
+
+        public static DataTable GetInternationalLicenses(int DriverID) {
+            return InternationalLicense.GetDriverInternationalLicenses(DriverID);
+        }
 
 
     }

@@ -22,7 +22,6 @@ namespace DVLD_Buisness {
             Mode = enMode.AddNew;
         }
 
-        // Why Not Private?
         private TestType(enTestType TestTypeID, string TestTypeTitle, string TestTypeDescription, float TestTypeFees) {
             this.TestTypeID = TestTypeID;
             this.TestTypeTitle = TestTypeTitle;

@@ -184,7 +184,70 @@ namespace DVLD_Buisness {
             return (LocalDrivingLicenseApplicationData.TotalTrialsPerTest(this.LocalDrivingLicenseApplicationID, (int)TestTypeID) > 0);
         }
 
+        public Test GetLastTestPerTestType(TestType.enTestType TestTypeID) {
+            return Test.FindLastTestPerPersonAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestTypeID);
+        }
 
+        public byte GetPassedTestCount() {
+            return Test.GetPassedTestCount(this.LocalDrivingLicenseApplicationID);
+        }
+
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID) {
+            return Test.GetPassedTestCount(LocalDrivingLicenseApplicationID);
+        }
+
+        public bool PassedAllTests() {
+            return Test.PassedAllTests(this.LocalDrivingLicenseApplicationID);
+        }
+
+        public static bool PassedAllTests(int LocalDrivingLicenseApplicationID) {
+            return Test.PassedAllTests(LocalDrivingLicenseApplicationID);
+        }
+
+        public int IssueLicenseForTheFirstTime(string Notes, int CreatedByUserID) {
+            int DriverID = -1;
+
+            Driver driver = Driver.FindByPersonID(this.ApplicantPersonID);
+
+            if (driver == null) {
+
+                driver = new Driver();
+                driver.PersonID = this.ApplicantPersonID;
+                driver.CreatedByUserID = CreatedByUserID;
+                if (driver.Save())
+                    DriverID = driver.DriverID;
+                else
+                    return -1;
+
+            } else
+                driver.DriverID = DriverID;
+            
+            License license = new License();
+            license.ApplicationID = this.ApplicantPersonID;
+            license.DriverID = DriverID;
+            license.LicenseClass = LicenseClassInfo.LicenseClassID;
+            license.IssueDate = DateTime.Now;
+            license.ExpirationDate = DateTime.Now.AddYears(this.LicenseClassInfo.DefaultValidityLength);
+            license.Notes = Notes;
+            license.PaidFees = this.LicenseClassInfo.ClassFees;
+            license.IsActive = true;
+            license.IssueReason = License.enIssueReason.FirstTime;
+            license.CreatedByUserID = CreatedByUserID;
+
+            if (license.Save()) {
+                this.SetComplete();
+                return license.LicenseID;
+            } else
+                return -1;
+        }
+
+        public int GetActiveLicenseID() {
+            return License.GetActiveLicenseIDByPersonID(this.ApplicantPersonID, this.LicenseClassID);
+        }
+        
+        public bool IsLicenseIssued() {
+            return (GetActiveLicenseID() != -1);
+        }
 
     }
 }
