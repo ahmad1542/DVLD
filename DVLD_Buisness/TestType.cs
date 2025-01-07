@@ -51,7 +51,7 @@ namespace DVLD_Buisness {
         }
 
         private bool _UpdateTestType() {
-            return TestTypeData.UpdateTestType((int)this.TestTypeID, this.TestTypeTitle, this.TestTypeDescription, this.TestTypeFees)
+            return TestTypeData.UpdateTestType((int)this.TestTypeID, this.TestTypeTitle, this.TestTypeDescription, this.TestTypeFees);
         }
 
         public bool Save() {
