@@ -10,9 +10,9 @@ using DVLD_Buisness;
 
 namespace DVLD.Classes
 {
-    internal static  class clsGlobal
+    internal static  class Global
     {
-        public static clsUser CurrentUser;
+        public static DVLD_Buisness.User CurrentUser;
 
         public static bool RememberUsernameAndPassword(string Username, string Password)
         {

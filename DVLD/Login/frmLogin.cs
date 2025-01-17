@@ -27,7 +27,7 @@ namespace DVLD.Login
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            clsUser user= clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(),txtPassword.Text.Trim());
+            DVLD_Buisness.User user = DVLD_Buisness.User.FindByUsernameAndPassword(txtUserName.Text.Trim(),txtPassword.Text.Trim());
 
             if (user != null) 
             { 
@@ -35,13 +35,13 @@ namespace DVLD.Login
                 if (chkRememberMe.Checked )
                 {
                     //store username and password
-                    clsGlobal.RememberUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+                    Global.RememberUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
 
                 } 
                   else
                 {
                     //store empty username and password
-                    clsGlobal.RememberUsernameAndPassword("", "");
+                    Global.RememberUsernameAndPassword("", "");
 
                 }
 
@@ -54,7 +54,7 @@ namespace DVLD.Login
                     return;
                 }
 
-                 clsGlobal.CurrentUser = user;
+                 Global.CurrentUser = user;
                  this.Hide();
                  frmMain frm = new frmMain(this);
                  frm.ShowDialog();
@@ -72,7 +72,7 @@ namespace DVLD.Login
         {
             string UserName = "", Password = "";
 
-            if (clsGlobal.GetStoredCredential(ref UserName, ref Password))
+            if (Global.GetStoredCredential(ref UserName, ref Password))
             {
                 txtUserName.Text = UserName;
                 txtPassword.Text = Password;

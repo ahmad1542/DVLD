@@ -32,7 +32,7 @@ namespace DVLD.People
 
         private enMode _Mode;
         private int _PersonID = -1;
-        clsPerson _Person;
+        Person _Person;
 
         public frmAddUpdatePerson()
         {
@@ -57,7 +57,7 @@ namespace DVLD.People
             if (_Mode == enMode.AddNew)
             {
                 lblTitle.Text = "Add New Person";
-                _Person = new clsPerson();
+                _Person = new Person();
             } 
             else
             {
@@ -98,7 +98,7 @@ namespace DVLD.People
 
         private void _FillCountriesInComoboBox()
         {
-            DataTable dtCountries = clsCountry.GetAllCountries();
+            DataTable dtCountries = Country.GetAllCountries();
 
             foreach (DataRow row in dtCountries.Rows)
             {
@@ -109,7 +109,7 @@ namespace DVLD.People
         private void _LoadData()
         {
            
-            _Person = clsPerson.Find(_PersonID);
+            _Person = Person.Find(_PersonID);
 
             if (_Person == null)
             {
@@ -127,7 +127,7 @@ namespace DVLD.People
             txtNationalNo.Text = _Person.NationalNo;
             dtpDateOfBirth.Value = _Person.DateOfBirth;
             
-            if (_Person.Gendor == 0)
+            if (_Person.Gender == 0)
                 rbMale.Checked= true;
             else
                 rbFemale.Checked = true;
@@ -190,7 +190,7 @@ namespace DVLD.People
                         //then we copy the new image to the image folder after we rename it
                         string SourceImageFile=pbPersonImage.ImageLocation.ToString();
 
-                        if (clsUtil.CopyImageToProjectImagesFolder(ref SourceImageFile))
+                        if (Util.CopyImageToProjectImagesFolder(ref SourceImageFile))
                         {
                             pbPersonImage.ImageLocation = SourceImageFile;
                              return true;
@@ -220,7 +220,7 @@ namespace DVLD.People
            if (! _HandlePersonImage())
                 return;
 
-            int NationalityCountryID = clsCountry.Find(cbCountry.Text).ID;
+            int NationalityCountryID = Country.Find(cbCountry.Text).CountryID;
 
             _Person.FirstName = txtFirstName.Text.Trim();
             _Person.SecondName = txtSecondName.Text.Trim();
@@ -233,9 +233,9 @@ namespace DVLD.People
             _Person.DateOfBirth = dtpDateOfBirth.Value;
 
             if (rbMale.Checked)
-                _Person.Gendor = (short) enGendor.Male;
+                _Person.Gender = (short) enGendor.Male;
             else
-                _Person.Gendor = (short) enGendor.Female;
+                _Person.Gender = (short) enGendor.Female;
 
             _Person.NationalityCountryID = NationalityCountryID;
             
@@ -334,7 +334,7 @@ namespace DVLD.People
                 return;
 
             //validate email format
-            if (!clsValidatoin.ValidateEmail(txtEmail.Text))
+            if (!Validation.ValidateEmail(txtEmail.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtEmail, "Invalid Email Address Format!");
@@ -361,7 +361,7 @@ namespace DVLD.People
             }
 
             //Make sure the national number is not used by another person
-            if (txtNationalNo.Text.Trim() != _Person.NationalNo && clsPerson.isPersonExist(txtNationalNo.Text.Trim()))
+            if (txtNationalNo.Text.Trim() != _Person.NationalNo && Person.IsPersonExist(txtNationalNo.Text.Trim()))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtNationalNo, "National Number is used for another person!");

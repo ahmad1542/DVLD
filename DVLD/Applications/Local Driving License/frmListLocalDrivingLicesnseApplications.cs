@@ -28,7 +28,7 @@ namespace DVLD.Tests
 
         private void frmListLocalDrivingLicesnseApplications_Load(object sender, EventArgs e)
         {
-            _dtAllLocalDrivingLicenseApplications = clsLocalDrivingLicenseApplication.GetAllLocalDrivingLicenseApplications();
+            _dtAllLocalDrivingLicenseApplications = LocalDrivingLicenseApplication.GetAllLocalDrivingLicenseApplications();
             dgvLocalDrivingLicenseApplications.DataSource = _dtAllLocalDrivingLicenseApplications;
             
             lblRecordsCount.Text = dgvLocalDrivingLicenseApplications.Rows.Count.ToString();
@@ -157,8 +157,8 @@ namespace DVLD.Tests
 
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            clsTestAppointment Appointment =
-                clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.VisionTest);
+            TestAppointment Appointment =
+                TestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, TestType.enTestType.VisionTest);
 
             if (Appointment == null)
             {
@@ -167,7 +167,7 @@ namespace DVLD.Tests
             }
 
 
-            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.VisionTest);
+            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, TestType.enTestType.VisionTest);
             frm.ShowDialog();
 
 
@@ -178,14 +178,14 @@ namespace DVLD.Tests
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
 
-            if (!clsLocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, clsTestType.enTestType.VisionTest))
+            if (!LocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, TestType.enTestType.VisionTest))
             {
                 MessageBox.Show("Person Should Pass the Vision Test First!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            clsTestAppointment Appointment =
-               clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.WrittenTest);
+            TestAppointment Appointment =
+               TestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, TestType.enTestType.WrittenTest);
 
 
             if (Appointment == null)
@@ -195,7 +195,7 @@ namespace DVLD.Tests
             }
 
 
-            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.WrittenTest);
+            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, TestType.enTestType.WrittenTest);
             frm.ShowDialog();
 
         }
@@ -204,14 +204,14 @@ namespace DVLD.Tests
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            if (!clsLocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, clsTestType.enTestType.WrittenTest))
+            if (!LocalDrivingLicenseApplication.DoesPassTestType(LocalDrivingLicenseApplicationID, TestType.enTestType.WrittenTest))
             {
                 MessageBox.Show("Person Should Pass the Written Test First!", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            clsTestAppointment Appointment =
-             clsTestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, clsTestType.enTestType.StreetTest);
+            TestAppointment Appointment =
+             TestAppointment.GetLastTestAppointment(LocalDrivingLicenseApplicationID, TestType.enTestType.PracticalTest);
 
 
             if (Appointment == null)
@@ -221,13 +221,13 @@ namespace DVLD.Tests
             }
 
 
-            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, clsTestType.enTestType.StreetTest);
+            frmTakeTest frm = new frmTakeTest(Appointment.TestAppointmentID, TestType.enTestType.PracticalTest);
             frm.ShowDialog();
 
 
         }
 
-        private void _ScheduleTest(clsTestType.enTestType TestType)
+        private void _ScheduleTest(TestType.enTestType TestType)
         {
 
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
@@ -240,19 +240,19 @@ namespace DVLD.Tests
       
         private void scheduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ScheduleTest(clsTestType.enTestType.VisionTest);
+            _ScheduleTest(TestType.enTestType.VisionTest);
         }
 
         private void scheduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            _ScheduleTest(clsTestType.enTestType.WrittenTest);
+            _ScheduleTest(TestType.enTestType.WrittenTest);
         }
 
         private void scheduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            _ScheduleTest(clsTestType.enTestType.StreetTest);
+            _ScheduleTest(TestType.enTestType.PracticalTest);
         }
 
         private void btnAddNewApplication_Click(object sender, EventArgs e)
@@ -276,8 +276,8 @@ namespace DVLD.Tests
         private void cmsApplications_Opening(object sender, CancelEventArgs e)
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
-            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication =
-                    clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID
+            LocalDrivingLicenseApplication LocalDrivingLicenseApplication =
+                    LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID
                                                     (LocalDrivingLicenseApplicationID);
 
             int TotalPassedTests = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[5].Value;
@@ -288,26 +288,26 @@ namespace DVLD.Tests
             issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = (TotalPassedTests == 3) && !LicenseExists;
             
             showLicenseToolStripMenuItem.Enabled = LicenseExists;
-            editToolStripMenuItem.Enabled = !LicenseExists && (LocalDrivingLicenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New);
+            editToolStripMenuItem.Enabled = !LicenseExists && (LocalDrivingLicenseApplication.ApplicationStatus == DVLD_Buisness.Application.enApplicationStatus.New);
             ScheduleTestsMenue.Enabled = !LicenseExists;
 
             //Enable/Disable Cancel Menue Item
             //We only canel the applications with status=new.
-            CancelApplicaitonToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication.ApplicationStatus==clsApplication.enApplicationStatus.New);
+            CancelApplicaitonToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication.ApplicationStatus==DVLD_Buisness.Application.enApplicationStatus.New);
 
             //Enable/Disable Delete Menue Item
             //We only allow delete incase the application status is new not complete or Cancelled.
             DeleteApplicationToolStripMenuItem.Enabled = 
-                (LocalDrivingLicenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New );
+                (LocalDrivingLicenseApplication.ApplicationStatus == DVLD_Buisness.Application.enApplicationStatus.New );
 
 
 
             //Enable Disable Schedule menue and it's sub menue
-            bool PassedVisionTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.VisionTest); ;
-            bool PassedWrittenTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.WrittenTest);
-            bool PassedStreetTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.StreetTest);
+            bool PassedVisionTest = LocalDrivingLicenseApplication.DoesPassTestType(TestType.enTestType.VisionTest); ;
+            bool PassedWrittenTest = LocalDrivingLicenseApplication.DoesPassTestType(TestType.enTestType.WrittenTest);
+            bool PassedStreetTest = LocalDrivingLicenseApplication.DoesPassTestType(TestType.enTestType.PracticalTest);
 
-            ScheduleTestsMenue.Enabled = (!PassedVisionTest || !PassedWrittenTest || !PassedStreetTest) && (LocalDrivingLicenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New);
+            ScheduleTestsMenue.Enabled = (!PassedVisionTest || !PassedWrittenTest || !PassedStreetTest) && (LocalDrivingLicenseApplication.ApplicationStatus == DVLD_Buisness.Application.enApplicationStatus.New);
 
             if (ScheduleTestsMenue.Enabled)
             {
@@ -330,7 +330,7 @@ namespace DVLD.Tests
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            int LicenseID = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(
+            int LicenseID = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(
                LocalDrivingLicenseApplicationID).GetActiveLicenseID();
 
             if (LicenseID != -1)
@@ -355,8 +355,8 @@ namespace DVLD.Tests
 
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication =
-                clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+            LocalDrivingLicenseApplication LocalDrivingLicenseApplication =
+                LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
 
             if (LocalDrivingLicenseApplication != null)
             {
@@ -380,8 +380,8 @@ namespace DVLD.Tests
 
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
 
-            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication =
-                clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+            LocalDrivingLicenseApplication LocalDrivingLicenseApplication =
+                LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
 
             if (LocalDrivingLicenseApplication != null)
             {
@@ -401,7 +401,7 @@ namespace DVLD.Tests
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
-            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+            LocalDrivingLicenseApplication localDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
 
             frmShowPersonLicenseHistory frm = new frmShowPersonLicenseHistory(localDrivingLicenseApplication.ApplicantPersonID);
             frm.ShowDialog();

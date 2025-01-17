@@ -32,7 +32,7 @@ namespace DVLD.Applications.International_License
 
         private void frmListInternationalLicesnseApplications_Load(object sender, EventArgs e)
         {
-            _dtInternationalLicenseApplications = clsInternationalLicense.GetAllInternationalLicenses();
+            _dtInternationalLicenseApplications = InternationalLicense.GetAllInternationalLicenses();
             cbFilterBy.SelectedIndex= 0;
 
             dgvInternationalLicenses.DataSource = _dtInternationalLicenseApplications;
@@ -84,7 +84,7 @@ namespace DVLD.Applications.International_License
         {
 
             int DriverID = (int)dgvInternationalLicenses.CurrentRow.Cells[2].Value;
-            int PersonID = clsDriver.FindByDriverID(DriverID).PersonID;
+            int PersonID = Driver.FindByDriverID(DriverID).PersonID;
 
             frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
             frm.ShowDialog();
@@ -94,7 +94,7 @@ namespace DVLD.Applications.International_License
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int DriverID = (int)dgvInternationalLicenses.CurrentRow.Cells[2].Value;
-            int PersonID = clsDriver.FindByDriverID(DriverID).PersonID;
+            int PersonID = Driver.FindByDriverID(DriverID).PersonID;
             frmShowPersonLicenseHistory frm = new frmShowPersonLicenseHistory(PersonID);
             frm.ShowDialog();
 

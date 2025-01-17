@@ -18,7 +18,7 @@ namespace DVLD.Controls.ApplicationControls
     public partial class ctrlDrivingLicenseApplicationInfo: UserControl
     {
 
-        private clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
+        private LocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
         private int _LocalDrivingLicenseApplicationID = -1;
 
@@ -36,7 +36,7 @@ namespace DVLD.Controls.ApplicationControls
 
         public void LoadApplicationInfoByLocalDrivingAppID(int LocalDrivingLicenseApplicationID)
         {
-            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+            _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
             if (_LocalDrivingLicenseApplication == null)
             {
                 _ResetLocalDrivingLicenseApplicationInfo();
@@ -51,7 +51,7 @@ namespace DVLD.Controls.ApplicationControls
 
         public void LoadApplicationInfoByApplicationID(int ApplicationID)
         {
-            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByApplicationID(ApplicationID);
+            _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByApplicationID(ApplicationID);
             if (_LocalDrivingLicenseApplication == null)
             {
                 _ResetLocalDrivingLicenseApplicationInfo();
@@ -73,7 +73,7 @@ namespace DVLD.Controls.ApplicationControls
 
            
             lblLocalDrivingLicenseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
-            lblAppliedFor.Text = clsLicenseClass.Find( _LocalDrivingLicenseApplication.LicenseClassID).ClassName ;
+            lblAppliedFor.Text = LicenseClass.Find( _LocalDrivingLicenseApplication.LicenseClassID).ClassName ;
             lblPassedTests.Text = _LocalDrivingLicenseApplication.GetPassedTestCount().ToString() +"/3" ; 
             ctrlApplicationBasicInfo1.LoadApplicationInfo(_LocalDrivingLicenseApplication.ApplicationID);
 

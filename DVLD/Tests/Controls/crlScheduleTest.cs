@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DVLD_Buisness.clsTestType;
+using static DVLD_Buisness.TestType;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD.Tests
@@ -26,13 +26,13 @@ namespace DVLD.Tests
         private enCreationMode _CreationMode=enCreationMode.FirstTimeSchedule;
 
 
-        private clsTestType.enTestType _TestTypeID =clsTestType.enTestType.VisionTest; 
-        private clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
+        private TestType.enTestType _TestTypeID =TestType.enTestType.VisionTest; 
+        private LocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
         private int _LocalDrivingLicenseApplicationID = -1;
-        private clsTestAppointment _TestAppointment;
+        private TestAppointment _TestAppointment;
         private int _TestAppointmentID = -1;
 
-        public clsTestType.enTestType TestTypeID
+        public TestType.enTestType TestTypeID
         {
             get
             {
@@ -45,20 +45,20 @@ namespace DVLD.Tests
                 switch (_TestTypeID)
                 {
 
-                    case clsTestType.enTestType.VisionTest:
+                    case TestType.enTestType.VisionTest:
                         {
                             gbTestType.Text = "Vision Test";
                             pbTestTypeImage.Image = Resources.Vision_512;
                             break;
                         }
 
-                    case clsTestType.enTestType.WrittenTest:
+                    case TestType.enTestType.WrittenTest:
                         {
                             gbTestType.Text = "Written Test";
                             pbTestTypeImage.Image = Resources.Written_Test_512;
                             break;
                         }
-                    case clsTestType.enTestType.StreetTest:
+                    case TestType.enTestType.PracticalTest:
                         {
                             gbTestType.Text = "Street Test";
                             pbTestTypeImage.Image = Resources.driving_test_512;
@@ -81,7 +81,7 @@ namespace DVLD.Tests
             _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
             _TestAppointmentID =AppointmentID;     
             _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
-            _LocalDrivingLicenseApplication =  clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            _LocalDrivingLicenseApplication =  LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
            if ( _LocalDrivingLicenseApplication==null)
             {
@@ -101,7 +101,7 @@ namespace DVLD.Tests
 
             if (_CreationMode == enCreationMode.RetakeTestSchedule)
             {
-                lblRetakeAppFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees.ToString();
+                lblRetakeAppFees.Text = ApplicationType.Find((int)DVLD_Buisness.Application.enApplicationType.RetakeTest).Fees.ToString();
                 gbRetakeTestInfo.Enabled = true;
                 lblTitle.Text = "Schedule Retake Test";
                 lblRetakeTestAppID.Text = "0";
@@ -124,11 +124,11 @@ namespace DVLD.Tests
 
             if (_Mode==enMode.AddNew)
             {
-                lblFees.Text = clsTestType.Find(_TestTypeID).Fees.ToString();
+                lblFees.Text = TestType.Find(_TestTypeID).TestTypeFees.ToString();
                 dtpTestDate.MinDate = DateTime.Now;
                 lblRetakeTestAppID.Text = "N/A";
               
-                _TestAppointment = new clsTestAppointment();
+                _TestAppointment = new TestAppointment();
             }
 
            else
@@ -156,7 +156,7 @@ namespace DVLD.Tests
         }
         private bool _HandleActiveTestAppointmentConstraint()
         {
-            if (_Mode == enMode.AddNew && clsLocalDrivingLicenseApplication.IsThereAnActiveScheduledTest(_LocalDrivingLicenseApplicationID, _TestTypeID))
+            if (_Mode == enMode.AddNew && LocalDrivingLicenseApplication.IsThereAnActiveScheduledTest(_LocalDrivingLicenseApplicationID, _TestTypeID))
             {
                 lblUserMessage.Text = "Person Already have an active appointment for this test";
                 btnSave.Enabled = false;
@@ -168,7 +168,7 @@ namespace DVLD.Tests
         }
         private bool _LoadTestAppointmentData()
         {
-            _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
+            _TestAppointment = TestAppointment.Find(_TestAppointmentID);
 
             if (_TestAppointment == null)
             {
@@ -229,16 +229,16 @@ namespace DVLD.Tests
 
             switch (TestTypeID)
             {
-                case clsTestType.enTestType.VisionTest:
+                case TestType.enTestType.VisionTest:
                     //in this case no required prvious test to pass.
                     lblUserMessage.Visible = false;
 
                     return true;
 
-                case clsTestType.enTestType.WrittenTest:
+                case TestType.enTestType.WrittenTest:
                     //Written Test, you cannot sechdule it before person passes the vision test.
                     //we check if pass visiontest 1.
-                    if (!_LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.VisionTest))
+                    if (!_LocalDrivingLicenseApplication.DoesPassTestType(TestType.enTestType.VisionTest))
                     {
                         lblUserMessage.Text = "Cannot Sechule, Vision Test should be passed first";
                         lblUserMessage.Visible = true;
@@ -256,11 +256,11 @@ namespace DVLD.Tests
 
                     return true;
 
-                case clsTestType.enTestType.StreetTest:
+                case TestType.enTestType.PracticalTest:
 
                     //Street Test, you cannot sechdule it before person passes the written test.
                     //we check if pass Written 2.
-                    if (!_LocalDrivingLicenseApplication.DoesPassTestType(clsTestType.enTestType.WrittenTest))
+                    if (!_LocalDrivingLicenseApplication.DoesPassTestType(TestType.enTestType.WrittenTest))
                     {
                         lblUserMessage.Text = "Cannot Sechule, Written Test should be passed first";
                         lblUserMessage.Visible = true;
@@ -292,24 +292,24 @@ namespace DVLD.Tests
                 //then we linke it with the appointment.
 
                 //First Create Applicaiton 
-                clsApplication Application = new clsApplication();
+                DVLD_Buisness.Application application = new DVLD_Buisness.Application();
 
-                Application.ApplicantPersonID = _LocalDrivingLicenseApplication.ApplicantPersonID;
-                Application.ApplicationDate = DateTime.Now;
-                Application.ApplicationTypeID = (int)clsApplication.enApplicationType.RetakeTest;
-                Application.ApplicationStatus = clsApplication.enApplicationStatus.Completed;
-                Application.LastStatusDate = DateTime.Now;
-                Application.PaidFees = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees;
-                Application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+                application.ApplicantPersonID = _LocalDrivingLicenseApplication.ApplicantPersonID;
+                application.ApplicationDate = DateTime.Now;
+                application.ApplicationTypeID = (int)DVLD_Buisness.Application.enApplicationType.RetakeTest;
+                application.ApplicationStatus = DVLD_Buisness.Application.enApplicationStatus.Completed;
+                application.LastStatusDate = DateTime.Now;
+                application.PaidFees = ApplicationType.Find((int)DVLD_Buisness.Application.enApplicationType.RetakeTest).Fees;
+                application.CreatedByUserID = Global.CurrentUser.UserID;
 
-                if (!Application.Save())
+                if (!application.Save())
                 {
                     _TestAppointment.RetakeTestApplicationID = -1;
                     MessageBox.Show("Faild to Create application", "Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
 
-                _TestAppointment.RetakeTestApplicationID = Application.ApplicationID;
+                _TestAppointment.RetakeTestApplicationID = application.ApplicationID;
                    
             }
             return true;
@@ -330,7 +330,7 @@ namespace DVLD.Tests
             _TestAppointment.LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
             _TestAppointment.AppointmentDate = dtpTestDate.Value;
             _TestAppointment.PaidFees = Convert.ToSingle(lblFees.Text);
-            _TestAppointment.CreatedByUserID=clsGlobal.CurrentUser.UserID;
+            _TestAppointment.CreatedByUserID=Global.CurrentUser.UserID;
             
             if (_TestAppointment.Save())
             {

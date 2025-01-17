@@ -15,7 +15,7 @@ namespace DVLD.Controls
     public partial class ctrlUserCard : UserControl
     {
 
-        private clsUser _User;
+        private DVLD_Buisness.User _User;
         private int _UserID = -1;
 
         public int UserID
@@ -30,7 +30,7 @@ namespace DVLD.Controls
 
         public void LoadUserInfo(int UserID)
         {
-            _User = clsUser.FindByUserID (UserID);
+            _User = DVLD_Buisness.User.FindByUserID (UserID);
             if (_User == null)
             {
                 _ResetPersonInfo();

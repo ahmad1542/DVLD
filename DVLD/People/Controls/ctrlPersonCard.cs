@@ -17,7 +17,7 @@ namespace DVLD.Controls
 {
     public partial class ctrlPersonCard : UserControl
     {
-        private clsPerson _Person;
+        private Person _Person;
 
         private int  _PersonID=-1;
 
@@ -26,7 +26,7 @@ namespace DVLD.Controls
             get { return _PersonID; }   
         }
 
-        public clsPerson SelectedPersonInfo
+        public Person SelectedPersonInfo
         {
             get { return _Person; }
         }
@@ -38,7 +38,7 @@ namespace DVLD.Controls
 
         public void LoadPersonInfo(int PersonID)
         {
-            _Person=clsPerson.Find(PersonID);
+            _Person=Person.Find(PersonID);
             if (_Person == null)
             {
                 ResetPersonInfo();
@@ -51,7 +51,7 @@ namespace DVLD.Controls
 
         public void LoadPersonInfo(string NationalNo)
         {
-            _Person = clsPerson.Find(NationalNo);
+            _Person = Person.Find(NationalNo);
             if (_Person == null)
             {
                 ResetPersonInfo();
@@ -64,7 +64,7 @@ namespace DVLD.Controls
 
         private void _LoadPersonImage()
         {
-            if (_Person.Gendor == 0)
+            if (_Person.Gender == 0)
                 pbPersonImage.Image = Resources.Male_512;
             else
                 pbPersonImage.Image = Resources.Female_512;
@@ -85,11 +85,11 @@ namespace DVLD.Controls
             lblPersonID.Text=_Person.PersonID.ToString();
             lblNationalNo.Text = _Person.NationalNo;
             lblFullName.Text = _Person.FullName;
-            lblGendor.Text = _Person.Gendor == 0 ? "Male" : "Female";
+            lblGendor.Text = _Person.Gender == 0 ? "Male" : "Female";
             lblEmail.Text = _Person.Email;
             lblPhone.Text = _Person.Phone;
             lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            lblCountry.Text= clsCountry.Find( _Person.NationalityCountryID).CountryName ;
+            lblCountry.Text= Country.Find( _Person.NationalityCountryID).CountryName ;
             lblAddress.Text= _Person.Address;
             _LoadPersonImage();
 

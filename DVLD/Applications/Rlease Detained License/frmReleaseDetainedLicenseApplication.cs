@@ -62,14 +62,14 @@ namespace DVLD.Applications.Rlease_Detained_License
                 return;
             }
 
-            lblApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.ReleaseDetainedDrivingLicsense).Fees.ToString();
-            lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
+            lblApplicationFees.Text = ApplicationType.Find((int)DVLD_Buisness.Application.enApplicationType.ReleaseDetainedDrivingLicense).Fees.ToString();
+            lblCreatedByUser.Text = Global.CurrentUser.UserName;
 
             lblDetainID.Text = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DetainedInfo.DetainID.ToString();
             lblLicenseID.Text = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.LicenseID.ToString();
            
             lblCreatedByUser.Text = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DetainedInfo.CreatedByUserInfo.UserName;
-            lblDetainDate.Text = clsFormat.DateToShort(ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DetainedInfo.DetainDate);
+            lblDetainDate.Text = Format.DateToShort(ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DetainedInfo.DetainDate);
             lblFineFees.Text = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DetainedInfo.FineFees.ToString();
             lblTotalFees.Text = (Convert.ToSingle( lblApplicationFees.Text) + Convert.ToSingle(lblFineFees.Text)).ToString();
 
@@ -105,7 +105,7 @@ namespace DVLD.Applications.Rlease_Detained_License
             int ApplicationID=-1 ;
            
 
-            bool IsReleased = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.ReleaseDetainedLicense(clsGlobal.CurrentUser.UserID,ref ApplicationID); ;
+            bool IsReleased = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.ReleaseDetainedLicense(Global.CurrentUser.UserID,ref ApplicationID); ;
             
             lblApplicationID.Text = ApplicationID.ToString();
             

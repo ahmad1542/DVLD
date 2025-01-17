@@ -78,7 +78,7 @@ namespace DVLD_DataAccess {
                 using (SqlCommand command = new SqlCommand(query, connection)) {
                     connection.Open();
 
-                    command.Parameters.AddWithValue("@PersonID", PersonID);
+                    command.Parameters.AddWithValue("@UserName", UserName);
                     command.Parameters.AddWithValue("@Password", Password);
 
                     using (SqlDataReader reader = command.ExecuteReader()) {

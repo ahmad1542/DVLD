@@ -16,12 +16,12 @@ namespace DVLD.Tests
     public partial class ctrlSecheduledTest: UserControl
     {
 
-        private clsTestType.enTestType _TestTypeID;
+        private TestType.enTestType _TestTypeID;
         private int _TestID=-1;
 
-        private clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
+        private LocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
-        public clsTestType.enTestType TestTypeID
+        public TestType.enTestType TestTypeID
         {
             get
             {
@@ -34,20 +34,20 @@ namespace DVLD.Tests
                 switch (_TestTypeID)
                 {
 
-                    case clsTestType.enTestType.VisionTest:
+                    case TestType.enTestType.VisionTest:
                         {
                             gbTestType.Text = "Vision Test";
                             pbTestTypeImage.Image = Resources.Vision_512;
                             break;
                         }
 
-                    case clsTestType.enTestType.WrittenTest:
+                    case TestType.enTestType.WrittenTest:
                         {
                             gbTestType.Text = "Written Test";
                             pbTestTypeImage.Image = Resources.Written_Test_512;
                             break;
                         }
-                    case clsTestType.enTestType.StreetTest:
+                    case TestType.enTestType.PracticalTest:
                         {
                             gbTestType.Text = "Street Test";
                             pbTestTypeImage.Image = Resources.driving_test_512;
@@ -77,7 +77,7 @@ namespace DVLD.Tests
 
         private int _TestAppointmentID = -1;
         private int _LocalDrivingLicenseApplicationID = -1;
-        private clsTestAppointment _TestAppointment;
+        private TestAppointment _TestAppointment;
 
         public void LoadInfo(int TestAppointmentID)
         {
@@ -85,7 +85,7 @@ namespace DVLD.Tests
             _TestAppointmentID = TestAppointmentID;
 
             
-            _TestAppointment = clsTestAppointment.Find(_TestAppointmentID);
+            _TestAppointment = TestAppointment.Find(_TestAppointmentID);
 
             //incase we did not find any appointment .
             if (_TestAppointment == null)
@@ -99,7 +99,7 @@ namespace DVLD.Tests
             _TestID = _TestAppointment.TestID;
             
             _LocalDrivingLicenseApplicationID = _TestAppointment.LocalDrivingLicenseApplicationID;
-            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
             if (_LocalDrivingLicenseApplication == null)
             {
@@ -118,7 +118,7 @@ namespace DVLD.Tests
 
 
 
-            lblDate.Text = clsFormat.DateToShort(_TestAppointment.AppointmentDate);
+            lblDate.Text = Format.DateToShort(_TestAppointment.AppointmentDate);
             lblFees.Text = _TestAppointment.PaidFees.ToString();
             lblTestID.Text = (_TestAppointment.TestID==-1)? "Not Taken Yet":_TestAppointment.TestID.ToString();
 

@@ -13,7 +13,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DVLD_Buisness.clsApplication;
+using static DVLD_Buisness.Application;
 
 namespace DVLD.Applications.International_License
 {
@@ -54,7 +54,7 @@ namespace DVLD.Applications.International_License
             }
 
             //check if person already have an active international license
-            int ActiveInternaionalLicenseID = clsInternationalLicense.GetActiveInternationalLicenseIDByDriverID(ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DriverID);
+            int ActiveInternaionalLicenseID = InternationalLicense.GetActiveInternationalLicenseIDByDriverID(ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DriverID);
 
             if (ActiveInternaionalLicenseID != -1)
             {
@@ -73,11 +73,11 @@ namespace DVLD.Applications.International_License
         {
            
 
-            lblApplicationDate.Text = clsFormat.DateToShort(DateTime.Now);
+            lblApplicationDate.Text = Format.DateToShort(DateTime.Now);
             lblIssueDate.Text = lblApplicationDate.Text;
-            lblExpirationDate.Text = clsFormat.DateToShort(DateTime.Now.AddYears(1));//add one year.
-            lblFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.NewInternationalLicense).Fees.ToString();
-            lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
+            lblExpirationDate.Text = Format.DateToShort(DateTime.Now.AddYears(1));//add one year.
+            lblFees.Text = ApplicationType.Find((int)DVLD_Buisness.Application.enApplicationType.NewInternationalLicense).Fees.ToString();
+            lblCreatedByUser.Text = Global.CurrentUser.UserName;
 
 
         }
@@ -100,15 +100,15 @@ namespace DVLD.Applications.International_License
           
 
 
-           clsInternationalLicense InternationalLicense= new clsInternationalLicense();
+           InternationalLicense InternationalLicense= new InternationalLicense();
             //those are the information for the base application, because it inhirts from application, they are part of the sub class.
 
             InternationalLicense.ApplicantPersonID = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID;
             InternationalLicense.ApplicationDate = DateTime.Now;
-            InternationalLicense.ApplicationStatus = clsApplication.enApplicationStatus.Completed;
+            InternationalLicense.ApplicationStatus = DVLD_Buisness.Application.enApplicationStatus.Completed;
             InternationalLicense.LastStatusDate = DateTime.Now;
-            InternationalLicense.PaidFees = clsApplicationType.Find((int)clsApplication.enApplicationType.NewInternationalLicense).Fees;
-            InternationalLicense.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            InternationalLicense.PaidFees = ApplicationType.Find((int)DVLD_Buisness.Application.enApplicationType.NewInternationalLicense).Fees;
+            InternationalLicense.CreatedByUserID = Global.CurrentUser.UserID;
 
            
             InternationalLicense.DriverID= ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.DriverID;
@@ -116,7 +116,7 @@ namespace DVLD.Applications.International_License
             InternationalLicense.IssueDate= DateTime.Now;
             InternationalLicense.ExpirationDate= DateTime.Now.AddYears(1);
            
-            InternationalLicense.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            InternationalLicense.CreatedByUserID = Global.CurrentUser.UserID;
 
             if (!InternationalLicense.Save())
             {

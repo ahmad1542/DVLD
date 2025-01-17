@@ -27,7 +27,7 @@ namespace DVLD.User
 
         private void frmListUsers_Load(object sender, EventArgs e)
         {
-            _dtAllUsers = clsUser.GetAllUsers();
+            _dtAllUsers = DVLD_Buisness.User.GetAllUsers();
             dgvUsers.DataSource = _dtAllUsers;
             cbFilterBy.SelectedIndex = 0;
             lblRecordsCount.Text = dgvUsers.Rows.Count.ToString();
@@ -217,7 +217,7 @@ namespace DVLD.User
         {
 
             int UserID = (int)dgvUsers.CurrentRow.Cells[0].Value;
-            if (clsUser.DeleteUser(UserID))
+            if (DVLD_Buisness.User.DeleteUser(UserID))
             {
                 MessageBox.Show("User has been deleted successfully", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmListUsers_Load(null, null);

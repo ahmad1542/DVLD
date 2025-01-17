@@ -69,7 +69,7 @@ namespace DVLD.Controls
             get { return ctrlPersonCard1.PersonID; }   
         }
 
-        public clsPerson SelectedPersonInfo
+        public Person SelectedPersonInfo
         {
             get { return ctrlPersonCard1.SelectedPersonInfo; }
         }

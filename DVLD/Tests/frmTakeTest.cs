@@ -16,13 +16,13 @@ namespace DVLD.Tests
     public partial class frmTakeTest: Form
     {
         private int _AppointmentID;
-        private clsTestType.enTestType _TestType;
+        private TestType.enTestType _TestType;
 
         private int _TestID = -1;
-        private clsTest _Test;
+        private Test _Test;
 
 
-        public frmTakeTest(int AppointmentID,clsTestType.enTestType TestType )
+        public frmTakeTest(int AppointmentID,TestType.enTestType TestType )
         {
             InitializeComponent();
             _AppointmentID= AppointmentID;
@@ -45,7 +45,7 @@ namespace DVLD.Tests
             int _TestID = ctrlSecheduledTest1.TestID;
             if (_TestID != -1)
             {
-                _Test = clsTest.Find(_TestID);
+                _Test = Test.Find(_TestID);
 
                 if (_Test.TestResult)
                     rbPass.Checked = true;
@@ -59,7 +59,7 @@ namespace DVLD.Tests
             }
             
             else
-                _Test = new clsTest();
+                _Test = new Test();
 
         }
 
@@ -81,7 +81,7 @@ namespace DVLD.Tests
             _Test.TestAppointmentID = _AppointmentID;
             _Test.TestResult = rbPass.Checked;
             _Test.Notes = txtNotes.Text.Trim();
-            _Test.CreatedByUserID=clsGlobal.CurrentUser.UserID;
+            _Test.CreatedByUserID=Global.CurrentUser.UserID;
 
             if (_Test.Save())
             {

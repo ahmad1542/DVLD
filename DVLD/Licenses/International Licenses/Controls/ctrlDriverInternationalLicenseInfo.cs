@@ -17,7 +17,7 @@ namespace DVLD.Licenses.International_Licenses.Controls
     public partial class ctrlDriverInternationalLicenseInfo : UserControl
     {
         private int _InternationalLicenseID;
-        private clsInternationalLicense _InternationalLicense;
+        private InternationalLicense _InternationalLicense;
         public ctrlDriverInternationalLicenseInfo()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace DVLD.Licenses.International_Licenses.Controls
 
         private void _LoadPersonImage()
         {
-            if (_InternationalLicense.DriverInfo.PersonInfo.Gendor == 0)
+            if (_InternationalLicense.DriverInfo.PersonInfo.Gender == 0)
                 pbPersonImage.Image = Resources.Male_512;
             else
                 pbPersonImage.Image = Resources.Female_512;
@@ -48,7 +48,7 @@ namespace DVLD.Licenses.International_Licenses.Controls
         public void LoadInfo(int InternationalLicenseID)
         {
             _InternationalLicenseID = InternationalLicenseID;
-            _InternationalLicense = clsInternationalLicense.Find(_InternationalLicenseID);
+            _InternationalLicense = InternationalLicense.Find(_InternationalLicenseID);
             if (_InternationalLicense == null)
             {
                 MessageBox.Show("Could not find Internationa License ID = " + _InternationalLicenseID.ToString(),
@@ -63,12 +63,12 @@ namespace DVLD.Licenses.International_Licenses.Controls
             lblLocalLicenseID.Text = _InternationalLicense.IssuedUsingLocalLicenseID.ToString();
             lblFullName.Text = _InternationalLicense.DriverInfo.PersonInfo.FullName;
             lblNationalNo.Text = _InternationalLicense.DriverInfo.PersonInfo.NationalNo;
-            lblGendor.Text = _InternationalLicense.DriverInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
-            lblDateOfBirth.Text = clsFormat.DateToShort(_InternationalLicense.DriverInfo.PersonInfo.DateOfBirth);
+            lblGendor.Text = _InternationalLicense.DriverInfo.PersonInfo.Gender == 0 ? "Male" : "Female";
+            lblDateOfBirth.Text = Format.DateToShort(_InternationalLicense.DriverInfo.PersonInfo.DateOfBirth);
 
             lblDriverID.Text = _InternationalLicense.DriverID.ToString();
-            lblIssueDate.Text = clsFormat.DateToShort(_InternationalLicense.IssueDate);
-            lblExpirationDate.Text = clsFormat.DateToShort(_InternationalLicense.ExpirationDate);
+            lblIssueDate.Text = Format.DateToShort(_InternationalLicense.IssueDate);
+            lblExpirationDate.Text = Format.DateToShort(_InternationalLicense.ExpirationDate);
            
             _LoadPersonImage();
 

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DVLD.Classes
 {
-    public class clsUtil
+    public class Util
     {
         public static string GenerateGUID()
         {

@@ -15,7 +15,7 @@ namespace DVLD.DriverLicense
     public partial class frmIssueDriverLicenseFirstTime : Form
     {
         private int _LocalDrivingLicenseApplicationID;
-        private  clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
+        private  LocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
         public frmIssueDriverLicenseFirstTime(int LocalDrivingLicenseApplicationID)
         {
@@ -33,7 +33,7 @@ namespace DVLD.DriverLicense
         {
 
             txtNotes.Focus();            
-            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
             if (_LocalDrivingLicenseApplication ==null)
             {
@@ -70,7 +70,7 @@ namespace DVLD.DriverLicense
 
         private void btnIssueLicense_Click(object sender, EventArgs e)
         {
-            int LicenseID=  _LocalDrivingLicenseApplication.IssueLicenseForTheFirtTime(txtNotes.Text.Trim(),clsGlobal.CurrentUser.UserID);
+            int LicenseID=  _LocalDrivingLicenseApplication.IssueLicenseForTheFirstTime(txtNotes.Text.Trim(),Global.CurrentUser.UserID);
 
             if (LicenseID != -1)
             {

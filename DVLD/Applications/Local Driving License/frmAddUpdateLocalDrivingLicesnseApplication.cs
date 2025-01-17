@@ -24,7 +24,7 @@ namespace DVLD.Applications
         private enMode _Mode;
         private int _LocalDrivingLicenseApplicationID = -1;
         private int _SelectedPersonID = -1;
-        clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
+        LocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
         public frmAddUpdateLocalDrivingLicesnseApplication()
         {
@@ -43,7 +43,7 @@ namespace DVLD.Applications
 
         private void _FillLicenseClassesInComoboBox()
         {
-            DataTable dtLicenseClasses = clsLicenseClass.GetAllLicenseClasses();
+            DataTable dtLicenseClasses = LicenseClass.GetAllLicenseClasses();
 
             foreach (DataRow row in dtLicenseClasses.Rows)
             {
@@ -62,14 +62,14 @@ namespace DVLD.Applications
                 
                 lblTitle.Text = "New Local Driving License Application";
                 this.Text = "New Local Driving License Application";
-                _LocalDrivingLicenseApplication = new clsLocalDrivingLicenseApplication();
+                _LocalDrivingLicenseApplication = new LocalDrivingLicenseApplication();
                 ctrlPersonCardWithFilter1.FilterFocus();
                 tpApplicationInfo.Enabled = false;
               
                 cbLicenseClass.SelectedIndex = 2;
-                lblFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.NewDrivingLicense).Fees.ToString();  
+                lblFees.Text = ApplicationType.Find((int)DVLD_Buisness.Application.enApplicationType.NewDrivingLicense).Fees.ToString();  
                 lblApplicationDate.Text= DateTime.Now.ToShortDateString();
-                lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
+                lblCreatedByUser.Text = Global.CurrentUser.UserName;
             }
             else
             {
@@ -88,7 +88,7 @@ namespace DVLD.Applications
         {
 
             ctrlPersonCardWithFilter1.FilterEnabled = false;
-            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
             if (_LocalDrivingLicenseApplication == null)
             {
@@ -100,10 +100,10 @@ namespace DVLD.Applications
 
             ctrlPersonCardWithFilter1.LoadPersonInfo(_LocalDrivingLicenseApplication.ApplicantPersonID);
             lblLocalDrivingLicebseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
-            lblApplicationDate.Text = clsFormat.DateToShort( _LocalDrivingLicenseApplication.ApplicationDate);
-            cbLicenseClass.SelectedIndex = cbLicenseClass.FindString(clsLicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName);
+            lblApplicationDate.Text = Format.DateToShort( _LocalDrivingLicenseApplication.ApplicationDate);
+            cbLicenseClass.SelectedIndex = cbLicenseClass.FindString(LicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName);
             lblFees.Text= _LocalDrivingLicenseApplication.PaidFees.ToString();
-            lblCreatedByUser.Text = clsUser.FindByUserID(_LocalDrivingLicenseApplication.CreatedByUserID).UserName;
+            lblCreatedByUser.Text = DVLD_Buisness.User.FindByUserID(_LocalDrivingLicenseApplication.CreatedByUserID).UserName;
 
         }
 
@@ -171,10 +171,10 @@ namespace DVLD.Applications
 
             }
 
-            int LicenseClassID = clsLicenseClass.Find(cbLicenseClass.Text).LicenseClassID;
+            int LicenseClassID = LicenseClass.Find(cbLicenseClass.Text).LicenseClassID;
 
 
-            int ActiveApplicationID = clsApplication.GetActiveApplicationIDForLicenseClass(_SelectedPersonID, clsApplication.enApplicationType.NewDrivingLicense, LicenseClassID);
+            int ActiveApplicationID = DVLD_Buisness.Application.GetActiveApplicationIDForLicenseClass(_SelectedPersonID, DVLD_Buisness.Application.enApplicationType.NewDrivingLicense, LicenseClassID);
 
             if (ActiveApplicationID != -1)
             {
@@ -185,7 +185,7 @@ namespace DVLD.Applications
 
 
             //check if user already have issued license of the same driving  class.
-           if( clsLicense.IsLicenseExistByPersonID(ctrlPersonCardWithFilter1.PersonID, LicenseClassID))
+           if(DVLD_Buisness.License.IsLicenseExistByPersonID(ctrlPersonCardWithFilter1.PersonID, LicenseClassID))
             {
 
                 MessageBox.Show("Person already have a license with the same applied driving class, Choose diffrent driving class", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -195,10 +195,10 @@ namespace DVLD.Applications
             _LocalDrivingLicenseApplication.ApplicantPersonID = ctrlPersonCardWithFilter1.PersonID; ;
             _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;
             _LocalDrivingLicenseApplication.ApplicationTypeID = 1;
-            _LocalDrivingLicenseApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
+            _LocalDrivingLicenseApplication.ApplicationStatus = DVLD_Buisness.Application.enApplicationStatus.New;
             _LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;
             _LocalDrivingLicenseApplication.PaidFees = Convert.ToSingle(lblFees.Text);
-            _LocalDrivingLicenseApplication.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            _LocalDrivingLicenseApplication.CreatedByUserID = Global.CurrentUser.UserID;
             _LocalDrivingLicenseApplication.LicenseClassID= LicenseClassID;
 
 

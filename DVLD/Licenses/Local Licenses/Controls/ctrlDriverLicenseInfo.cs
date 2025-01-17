@@ -18,7 +18,7 @@ namespace DVLD.DriverLicense
     public partial class ctrlDriverLicenseInfo : UserControl
     {
         private int _LicenseID;
-        private clsLicense _License;
+        private DVLD_Buisness.License _License;
 
         public ctrlDriverLicenseInfo()
         {
@@ -31,12 +31,12 @@ namespace DVLD.DriverLicense
             get { return _LicenseID; }
         }
 
-        public clsLicense SelectedLicenseInfo
+        public DVLD_Buisness.License SelectedLicenseInfo
         { get { return _License; } }
 
         private void _LoadPersonImage()
         {
-            if (_License.DriverInfo.PersonInfo.Gendor == 0)
+            if (_License.DriverInfo.PersonInfo.Gender == 0)
                 pbPersonImage.Image = Resources.Male_512;
             else
                 pbPersonImage.Image = Resources.Female_512;
@@ -54,7 +54,7 @@ namespace DVLD.DriverLicense
         public void LoadInfo(int LicenseID)
         {
             _LicenseID = LicenseID;
-            _License = clsLicense.Find(_LicenseID);
+            _License = DVLD_Buisness.License.Find(_LicenseID);
             if (_License == null)
             {
                 MessageBox.Show("Could not find License ID = " + _LicenseID.ToString(),
@@ -66,15 +66,15 @@ namespace DVLD.DriverLicense
             lblLicenseID.Text = _License.LicenseID.ToString();
             lblIsActive.Text = _License.IsActive ? "Yes" : "No";
             lblIsDetained.Text = _License.IsDetained ? "Yes" : "No";
-            lblClass.Text = _License.LicenseClassIfo.ClassName;
+            lblClass.Text = _License.LicenseClassInfo.ClassName;
             lblFullName.Text = _License.DriverInfo.PersonInfo.FullName;
             lblNationalNo.Text = _License.DriverInfo.PersonInfo.NationalNo;
-            lblGendor.Text = _License.DriverInfo.PersonInfo.Gendor ==0 ? "Male":"Female";
-            lblDateOfBirth.Text = clsFormat.DateToShort(_License.DriverInfo.PersonInfo.DateOfBirth);
+            lblGendor.Text = _License.DriverInfo.PersonInfo.Gender == 0 ? "Male":"Female";
+            lblDateOfBirth.Text = Format.DateToShort(_License.DriverInfo.PersonInfo.DateOfBirth);
 
             lblDriverID.Text= _License.DriverID.ToString();
-            lblIssueDate.Text = clsFormat.DateToShort(_License.IssueDate);
-            lblExpirationDate.Text = clsFormat.DateToShort(_License.ExpirationDate);
+            lblIssueDate.Text = Format.DateToShort(_License.IssueDate);
+            lblExpirationDate.Text = Format.DateToShort(_License.ExpirationDate);
             lblIssueReason.Text = _License.IssueReasonText;
             lblNotes.Text= _License.Notes=="" ? "No Notes":_License.Notes;
             _LoadPersonImage();

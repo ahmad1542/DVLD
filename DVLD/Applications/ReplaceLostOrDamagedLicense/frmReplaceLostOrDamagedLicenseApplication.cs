@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DVLD_Buisness.clsLicense;
+using static DVLD_Buisness.License;
 
 namespace DVLD.Applications.ReplaceLostOrDamagedLicense
 {
@@ -31,9 +31,9 @@ namespace DVLD.Applications.ReplaceLostOrDamagedLicense
 
             if (rbDamagedLicense.Checked)
 
-                return (int)clsApplication.enApplicationType.ReplaceDamagedDrivingLicense;
+                return (int)DVLD_Buisness.Application.enApplicationType.ReplaceDamagedDrivingLicense;
             else
-                return (int)clsApplication.enApplicationType.ReplaceLostDrivingLicense;
+                return (int)DVLD_Buisness.Application.enApplicationType.ReplaceLostDrivingLicense;
         }
 
         private enIssueReason _GetIssueReason()
@@ -51,8 +51,8 @@ namespace DVLD.Applications.ReplaceLostOrDamagedLicense
         private void frmReplaceLostOrDamagedLicenseApplication_Load(object sender, EventArgs e)
         {
            
-            lblApplicationDate.Text = clsFormat.DateToShort(DateTime.Now);
-            lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
+            lblApplicationDate.Text = Format.DateToShort(DateTime.Now);
+            lblCreatedByUser.Text = Global.CurrentUser.UserName;
           
             rbDamagedLicense.Checked = true;
 
@@ -62,14 +62,14 @@ namespace DVLD.Applications.ReplaceLostOrDamagedLicense
         {
             lblTitle.Text = "Replacement for Damaged License";
             this.Text=lblTitle.Text;
-            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
+            lblApplicationFees.Text = ApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
         }
 
         private void rbLostLicense_CheckedChanged(object sender, EventArgs e)
         {
             lblTitle.Text = "Replacement for Lost License";
             this.Text = lblTitle.Text;
-            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
+            lblApplicationFees.Text = ApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
         }
 
         private void frmReplaceLostOrDamagedLicenseApplication_Activated(object sender, EventArgs e)
@@ -108,9 +108,9 @@ namespace DVLD.Applications.ReplaceLostOrDamagedLicense
             }
 
 
-            clsLicense NewLicense =
+            DVLD_Buisness.License NewLicense =
                ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.Replace (_GetIssueReason(),
-               clsGlobal.CurrentUser.UserID);
+               Global.CurrentUser.UserID);
 
             if (NewLicense == null)
             {

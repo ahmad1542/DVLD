@@ -16,7 +16,7 @@ namespace DVLD.Applications
     {
 
         private int _ApplicationTypeID=-1;
-        private clsApplicationType _ApplicationType;
+        private ApplicationType _ApplicationType;
 
         public frmEditApplicationType(int ApplicationTypeID )
         {
@@ -30,7 +30,7 @@ namespace DVLD.Applications
         {
             lblApplicationTypeID.Text=_ApplicationTypeID.ToString();
 
-            _ApplicationType = clsApplicationType.Find(_ApplicationTypeID);
+            _ApplicationType = ApplicationType.Find(_ApplicationTypeID);
 
             if (_ApplicationType!=null)
             {
@@ -101,7 +101,7 @@ namespace DVLD.Applications
             };
 
             
-            if (!clsValidatoin.IsNumber(txtFees.Text))
+            if (!Validation.IsNumber(txtFees.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtFees, "Invalid Number.");

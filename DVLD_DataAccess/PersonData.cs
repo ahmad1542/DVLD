@@ -40,7 +40,7 @@ namespace DVLD_DataAccess {
                             LastName = (string)reader["LastName"];
                             NationalNo = (string)reader["NationalNo"];
                             DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            Gender = (short)reader["Gender"];
+                            Gender = (byte)reader["Gender"];
                             Address = (string)reader["Address"];
                             Phone = (string)reader["Phone"];
 
@@ -100,7 +100,7 @@ namespace DVLD_DataAccess {
 
                             LastName = (string)reader["LastName"];
                             DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            Gender = (short)reader["Gender"];
+                            Gender = (byte)reader["Gender"];
                             Address = (string)reader["Address"];
                             Phone = (string)reader["Phone"];
 

@@ -106,9 +106,9 @@
     <Compile Include="Applications\ReplaceLostOrDamagedLicense\frmReplaceLostOrDamagedLicenseApplication.Designer.cs">
       <DependentUpon>frmReplaceLostOrDamagedLicenseApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global Classes\clsGlobal.cs" />
-    <Compile Include="Global Classes\clsFormat.cs" />
-    <Compile Include="Global Classes\clsValidatoin.cs" />
+    <Compile Include="Global Classes\Global.cs" />
+    <Compile Include="Global Classes\Format.cs" />
+    <Compile Include="Global Classes\Validation.cs" />
     <Compile Include="Applications\Controls\ctrlApplicationBasicInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>

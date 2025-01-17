@@ -27,7 +27,7 @@ namespace DVLD.Applications
 
         private void frmManageApplicationTypes_Load(object sender, EventArgs e)
         {
-            _dtAllApplicationTypes = clsApplicationType.GetAllApplicationTypes();
+            _dtAllApplicationTypes = ApplicationType.GetAllApplicationTypes();
             dgvApplicationTypes.DataSource = _dtAllApplicationTypes;
             lblRecordsCount.Text = dgvApplicationTypes.Rows.Count.ToString();
 

@@ -34,7 +34,7 @@ namespace DVLD.Applications.Rlease_Detained_License
         {
             cbFilterBy.SelectedIndex= 0;
 
-            _dtDetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
+            _dtDetainedLicenses = DetainedLicense.GetAllDetainedLicenses();
 
             dgvDetainedLicenses.DataSource = _dtDetainedLicenses;
             lblTotalRecords.Text = dgvDetainedLicenses.Rows.Count.ToString();
@@ -195,7 +195,7 @@ namespace DVLD.Applications.Rlease_Detained_License
         {
             
             int LicenseID = (int)dgvDetainedLicenses.CurrentRow.Cells[1].Value;
-            int PersonID = clsLicense.Find(LicenseID).DriverInfo.PersonID;
+            int PersonID = DVLD_Buisness.License.Find(LicenseID).DriverInfo.PersonID;
             frmShowPersonLicenseHistory frm = new frmShowPersonLicenseHistory(PersonID);
             frm.ShowDialog();
         }
@@ -203,7 +203,7 @@ namespace DVLD.Applications.Rlease_Detained_License
         private void PesonDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int LicenseID = (int)dgvDetainedLicenses.CurrentRow.Cells[1].Value;
-            int PersonID = clsLicense.Find(LicenseID).DriverInfo.PersonID;
+            int PersonID = DVLD_Buisness.License.Find(LicenseID).DriverInfo.PersonID;
 
             frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
             frm.ShowDialog();

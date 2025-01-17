@@ -35,7 +35,7 @@ namespace DVLD.Applications.Detain_License
             }
 
          
-            _DetainID = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.Detain(Convert.ToSingle(txtFineFees.Text), clsGlobal.CurrentUser.UserID);
+            _DetainID = ctrlDriverLicenseInfoWithFilter1.SelectedLicenseInfo.Detain(Convert.ToSingle(txtFineFees.Text), Global.CurrentUser.UserID);
             if (_DetainID == -1)
             {
                 MessageBox.Show("Faild to Detain License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,8 +54,8 @@ namespace DVLD.Applications.Detain_License
 
         private void frmDetainLicenseApplication_Load(object sender, EventArgs e)
         {
-            lblDetainDate.Text = clsFormat.DateToShort(DateTime.Now);
-            lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
+            lblDetainDate.Text = Format.DateToShort(DateTime.Now);
+            lblCreatedByUser.Text = Global.CurrentUser.UserName;
 
         }
 
@@ -124,7 +124,7 @@ namespace DVLD.Applications.Detain_License
             };
 
 
-            if (!clsValidatoin.IsNumber(txtFineFees.Text))
+            if (!Validation.IsNumber(txtFineFees.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtFineFees, "Invalid Number.");

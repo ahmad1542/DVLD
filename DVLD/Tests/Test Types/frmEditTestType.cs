@@ -17,10 +17,10 @@ namespace DVLD.Tests
     public partial class frmEditTestType: Form
     {
 
-        private clsTestType.enTestType _TestTypeID = clsTestType.enTestType.VisionTest;
-        private clsTestType _TestType;
+        private TestType.enTestType _TestTypeID = TestType.enTestType.VisionTest;
+        private TestType _TestType;
 
-        public frmEditTestType(clsTestType.enTestType TestTypeID)
+        public frmEditTestType(TestType.enTestType TestTypeID)
         {
             InitializeComponent();
             _TestTypeID = TestTypeID;
@@ -31,16 +31,16 @@ namespace DVLD.Tests
         private void frmEditTestType_Load(object sender, EventArgs e)
         {
           
-            _TestType = clsTestType.Find( _TestTypeID);
+            _TestType = TestType.Find( _TestTypeID);
 
             if (_TestType != null)
             {
               
 
                 lblTestTypeID.Text = ((int) _TestTypeID).ToString();
-                txtTitle.Text = _TestType.Title;
-                txtDescription.Text = _TestType.Description;
-                txtFees.Text = _TestType.Fees.ToString();
+                txtTitle.Text = _TestType.TestTypeTitle;
+                txtDescription.Text = _TestType.TestTypeDescription;
+                txtFees.Text = _TestType.TestTypeFees.ToString();
             }
             
             else
@@ -67,9 +67,9 @@ namespace DVLD.Tests
 
             }
 
-            _TestType.Title = txtTitle.Text.Trim();
-            _TestType.Description = txtDescription.Text.Trim();
-            _TestType.Fees = Convert.ToSingle(txtFees.Text.Trim());
+            _TestType.TestTypeTitle = txtTitle.Text.Trim();
+            _TestType.TestTypeDescription = txtDescription.Text.Trim();
+            _TestType.TestTypeFees = Convert.ToSingle(txtFees.Text.Trim());
 
 
             if (_TestType.Save())
@@ -122,7 +122,7 @@ namespace DVLD.Tests
             };
 
            
-            if (!clsValidatoin.IsNumber(txtFees.Text))
+            if (!Validation.IsNumber(txtFees.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtFees, "Invalid Number.");

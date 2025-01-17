@@ -15,7 +15,7 @@ namespace DVLD.User
     public partial class frmChangePassword : Form
     {
         private int _UserID;
-        private clsUser _User;
+        private DVLD_Buisness.User _User;
 
         public frmChangePassword(int UserID )
         {
@@ -36,7 +36,7 @@ namespace DVLD.User
         {
              _ResetDefualtValues();
 
-              _User = clsUser.FindByUserID(_UserID);
+              _User = DVLD_Buisness.User.FindByUserID(_UserID);
 
             if (_User == null)
             {

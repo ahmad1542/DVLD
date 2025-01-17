@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DVLD_Buisness.clsTestType;
+using static DVLD_Buisness.TestType;
 
 namespace DVLD.Tests
 {
@@ -19,9 +19,9 @@ namespace DVLD.Tests
 
         private DataTable _dtLicenseTestAppointments;
         private int _LocalDrivingLicenseApplicationID ;
-        private clsTestType.enTestType _TestType = clsTestType.enTestType.VisionTest;
+        private TestType.enTestType _TestType = TestType.enTestType.VisionTest;
 
-        public frmListTestAppointments(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestType)
+        public frmListTestAppointments(int LocalDrivingLicenseApplicationID, TestType.enTestType TestType)
         {
             InitializeComponent();
             _LocalDrivingLicenseApplicationID= LocalDrivingLicenseApplicationID;
@@ -39,7 +39,7 @@ namespace DVLD.Tests
             switch (_TestType)
             {
 
-                case clsTestType.enTestType.VisionTest:
+                case TestType.enTestType.VisionTest:
                     {
                         lblTitle.Text = "Vision Test Appointments";
                         this.Text= lblTitle.Text;
@@ -47,14 +47,14 @@ namespace DVLD.Tests
                         break;
                     }
 
-                case clsTestType.enTestType.WrittenTest:
+                case TestType.enTestType.WrittenTest:
                     {
                         lblTitle.Text = "Written Test Appointments";
                         this.Text = lblTitle.Text;
                         pbTestTypeImage.Image = Resources.Written_Test_512;
                         break;
                     }
-                case clsTestType.enTestType.StreetTest:
+                case TestType.enTestType.PracticalTest:
                     {
                         lblTitle.Text = "Street Test Appointments";
                         this.Text = lblTitle.Text;
@@ -70,7 +70,7 @@ namespace DVLD.Tests
 
 
             ctrlDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
-            _dtLicenseTestAppointments = clsTestAppointment.GetApplicationTestAppointmentsPerTestType(_LocalDrivingLicenseApplicationID,_TestType);
+            _dtLicenseTestAppointments = TestAppointment.GetApplicationTestAppointmentsPerTestType(_LocalDrivingLicenseApplicationID,_TestType);
             
             dgvLicenseTestAppointments.DataSource = _dtLicenseTestAppointments;
             lblRecordsCount.Text = dgvLicenseTestAppointments.Rows.Count.ToString();
@@ -98,7 +98,7 @@ namespace DVLD.Tests
         private void btnAddNewAppointment_Click(object sender, EventArgs e)
         {
 
-            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+            LocalDrivingLicenseApplication localDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
 
             if (localDrivingLicenseApplication.IsThereAnActiveScheduledTest( _TestType))
@@ -110,7 +110,7 @@ namespace DVLD.Tests
          
 
             //---
-             clsTest LastTest = localDrivingLicenseApplication.GetLastTestPerTestType( _TestType);
+             Test LastTest = localDrivingLicenseApplication.GetLastTestPerTestType( _TestType);
 
             if (LastTest == null)
             {

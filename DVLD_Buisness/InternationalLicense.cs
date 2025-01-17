@@ -124,11 +124,11 @@ namespace DVLD_Buisness {
         }
 
         public static int GetActiveInternationalLicenseIDByDriverID(int DriverID) {
-            return InternationalLicense.GetActiveInternationalLicenseIDByDriverID(DriverID);
+            return InternationalLicenseData.GetActiveInternationalLicenseIDByDriverID(DriverID);
         }
 
         public static DataTable GetDriverInternationalLicenses(int DriverID) {
-            return InternationalLicense.GetDriverInternationalLicenses(DriverID);
+            return InternationalLicenseData.GetDriverInternationalLicenses(DriverID);
         }
         
         public static DataTable GetAllInternationalLicenses() {

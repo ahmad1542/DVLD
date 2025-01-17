@@ -54,7 +54,7 @@ namespace DVLD.Licenses.Controls
             get { return ctrlDriverLicenseInfo1.LicenseID; }
         }
 
-        public clsLicense SelectedLicenseInfo
+        public DVLD_Buisness.License SelectedLicenseInfo
         { get { return ctrlDriverLicenseInfo1.SelectedLicenseInfo; } }
 
         public void LoadLicenseInfo(int LicenseID)

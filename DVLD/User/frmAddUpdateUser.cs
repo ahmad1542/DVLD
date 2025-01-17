@@ -23,7 +23,7 @@ namespace DVLD.User
         public enum enMode { AddNew = 0, Update = 1 };
         private enMode _Mode;
         private int _UserID = -1;
-        clsUser _User;
+        DVLD_Buisness.User _User;
        
         public frmAddUpdateUser()
         {
@@ -48,7 +48,7 @@ namespace DVLD.User
             {
                 lblTitle.Text = "Add New User";
                 this.Text = "Add New User";
-                _User = new clsUser();
+                _User = new DVLD_Buisness.User();
              
                 tpLoginInfo.Enabled = false;
               
@@ -76,7 +76,7 @@ namespace DVLD.User
         private void _LoadData()
         {
 
-            _User = clsUser.FindByUserID(_UserID);
+            _User = DVLD_Buisness.User.FindByUserID(_UserID);
             ctrlPersonCardWithFilter1.FilterEnabled = false;
 
             if (_User == null)
@@ -183,7 +183,7 @@ namespace DVLD.User
             if (_Mode == enMode.AddNew)
             {
 
-                if (clsUser.isUserExist(txtUserName.Text.Trim()))
+                if (DVLD_Buisness.User.isUserExist(txtUserName.Text.Trim()))
                 {
                     e.Cancel = true;
                     errorProvider1.SetError(txtUserName, "username is used by another user");
@@ -198,7 +198,7 @@ namespace DVLD.User
                 //incase update make sure not to use anothers user name
                 if (_User.UserName !=txtUserName.Text.Trim())
                 {
-                        if (clsUser.isUserExist(txtUserName.Text.Trim()))
+                        if (DVLD_Buisness.User.isUserExist(txtUserName.Text.Trim()))
                         {
                             e.Cancel = true;
                             errorProvider1.SetError(txtUserName, "username is used by another user");
@@ -227,7 +227,7 @@ namespace DVLD.User
             if (ctrlPersonCardWithFilter1.PersonID!=-1)
             {
                 
-                if (clsUser.isUserExistForPersonID(ctrlPersonCardWithFilter1.PersonID))
+                if (DVLD_Buisness.User.isUserExistForPersonID(ctrlPersonCardWithFilter1.PersonID))
                 {
 
                     MessageBox.Show("Selected Person already has a user, choose another one.", "Select another Person", MessageBoxButtons.OK, MessageBoxIcon.Error);

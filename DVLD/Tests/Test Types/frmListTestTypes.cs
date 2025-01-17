@@ -29,7 +29,7 @@ namespace DVLD.Tests
 
         private void frmListTestTypes_Load(object sender, EventArgs e)
         {
-            _dtAllTestTypes = clsTestType.GetAllTestTypes();
+            _dtAllTestTypes = TestType.GetAllTestTypes();
             dgvTestTypes.DataSource = _dtAllTestTypes;
             lblRecordsCount.Text = dgvTestTypes.Rows.Count.ToString();
 
@@ -48,7 +48,7 @@ namespace DVLD.Tests
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmEditTestType frm = new frmEditTestType((clsTestType.enTestType)dgvTestTypes.CurrentRow.Cells[0].Value);
+            frmEditTestType frm = new frmEditTestType((TestType.enTestType)dgvTestTypes.CurrentRow.Cells[0].Value);
            frm.ShowDialog();
             frmListTestTypes_Load(null, null);
 

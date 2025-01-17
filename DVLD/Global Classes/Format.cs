@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DVLD.Classes
 {
-    public class clsFormat
+    public class Format
     {
         public static string DateToShort(DateTime Dt1)
         {

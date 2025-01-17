@@ -17,7 +17,7 @@ namespace DVLD.Controls.ApplicationControls
     public partial class ctrlApplicationBasicInfo : UserControl
     {
 
-        private clsApplication _Application;
+        private DVLD_Buisness.Application _Application;
 
         private int _ApplicationID = -1;
 
@@ -34,7 +34,7 @@ namespace DVLD.Controls.ApplicationControls
 
         public void LoadApplicationInfo(int ApplicationID)
         {
-            _Application = clsApplication.FindBaseApplication(ApplicationID);
+            _Application = DVLD_Buisness.Application.FindBaseApplication(ApplicationID);
             if (_Application == null)
             {
                 ResetApplicationInfo();
@@ -52,8 +52,8 @@ namespace DVLD.Controls.ApplicationControls
             lblType.Text = _Application.ApplicationTypeInfo.Title;
             lblFees.Text = _Application.PaidFees.ToString();
             lblApplicant.Text = _Application.ApplicantFullName;
-            lblDate.Text = clsFormat.DateToShort(_Application.ApplicationDate);
-            lblStatusDate.Text = clsFormat.DateToShort(_Application.LastStatusDate);
+            lblDate.Text = Format.DateToShort(_Application.ApplicationDate);
+            lblStatusDate.Text = Format.DateToShort(_Application.LastStatusDate);
             lblCreatedByUser.Text = _Application.CreatedByUserInfo.UserName;
         }
 

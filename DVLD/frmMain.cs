@@ -51,28 +51,28 @@ namespace DVLD
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.White;
-            lblLoggedInUser.Text = "LoggedIn User: " + clsGlobal.CurrentUser.UserName;
+            lblLoggedInUser.Text = "LoggedIn User: " + Global.CurrentUser.UserName;
             this.Refresh();
 
         }
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmUserInfo frm = new frmUserInfo(clsGlobal.CurrentUser.UserID);
+            frmUserInfo frm = new frmUserInfo(Global.CurrentUser.UserID);
             frm.ShowDialog();
 
         }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clsGlobal.CurrentUser = null;
+            Global.CurrentUser = null;
             _frmLogin.Show();
             this.Close();
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmChangePassword frm = new frmChangePassword(clsGlobal.CurrentUser.UserID);
+            frmChangePassword frm = new frmChangePassword(Global.CurrentUser.UserID);
             frm.ShowDialog();
 
         }

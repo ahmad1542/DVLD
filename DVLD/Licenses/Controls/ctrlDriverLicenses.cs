@@ -17,7 +17,7 @@ namespace DVLD.Licenses.Local_Licenses.Controls
     public partial class ctrlDriverLicenses : UserControl
     {
         private int _DriverID;
-        private clsDriver _Driver ;
+        private Driver _Driver ;
         private DataTable _dtDriverLocalLicensesHistory;
         private DataTable _dtDriverInternationalLicensesHistory;
 
@@ -29,7 +29,7 @@ namespace DVLD.Licenses.Local_Licenses.Controls
         private void _LoadLocalLicenseInfo()
         {
 
-            _dtDriverLocalLicensesHistory = clsDriver.GetLicenses(_DriverID);
+            _dtDriverLocalLicensesHistory = Driver.GetLicenses(_DriverID);
 
 
             dgvLocalLicensesHistory.DataSource = _dtDriverLocalLicensesHistory;
@@ -61,7 +61,7 @@ namespace DVLD.Licenses.Local_Licenses.Controls
         private void _LoadInternationalLicenseInfo()
         {
 
-            _dtDriverInternationalLicensesHistory = clsDriver.GetInternationalLicenses(_DriverID);
+            _dtDriverInternationalLicensesHistory = Driver.GetInternationalLicenses(_DriverID);
 
 
             dgvInternationalLicensesHistory.DataSource = _dtDriverInternationalLicensesHistory;
@@ -93,7 +93,7 @@ namespace DVLD.Licenses.Local_Licenses.Controls
         public void LoadInfo(int DriverID)
         {
             _DriverID = DriverID;
-            _Driver = clsDriver.FindByDriverID(_DriverID);
+            _Driver = Driver.FindByDriverID(_DriverID);
 
             _LoadLocalLicenseInfo();
             _LoadInternationalLicenseInfo();
@@ -103,10 +103,10 @@ namespace DVLD.Licenses.Local_Licenses.Controls
         public void LoadInfoByPersonID(int PersonID)
         {
             
-            _Driver = clsDriver.FindByPersonID(PersonID);
+            _Driver = Driver.FindByPersonID(PersonID);
             if (_Driver != null)
             {
-                _DriverID = clsDriver.FindByPersonID(PersonID).DriverID;
+                _DriverID = Driver.FindByPersonID(PersonID).DriverID;
             }
            
             _LoadLocalLicenseInfo();
