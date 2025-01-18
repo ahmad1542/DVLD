@@ -8,74 +8,57 @@ using System.Windows.Forms;
 using DVLD_Buisness;
 
 
-namespace DVLD.Classes
-{
-    internal static  class Global
-    {
+namespace DVLD.Classes {
+    internal static class Global {
         public static DVLD_Buisness.User CurrentUser;
 
-        public static bool RememberUsernameAndPassword(string Username, string Password)
-        {
+        public static bool RememberUsernameAndPassword(string Username, string Password) {
 
-            try
-            {
+            //File Handling in C#
+            try {
                 //this will get the current project directory folder.
                 string currentDirectory = System.IO.Directory.GetCurrentDirectory();
-
 
                 // Define the path to the text file where you want to save the data
                 string filePath = currentDirectory + "\\data.txt";
 
                 //incase the username is empty, delete the file
-                if (Username=="" && File.Exists(filePath)) 
-                { 
-                     File.Delete(filePath);
+                if (Username == "" && File.Exists(filePath)) {
+                    File.Delete(filePath);
                     return true;
-
                 }
 
-                // concatonate username and passwrod withe seperator.
-                string dataToSave = Username + "#//#"+Password ;
+                // concatenate username and passwrod with seperator.
+                string dataToSave = Username + "#//#" + Password;
 
                 // Create a StreamWriter to write to the file
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
+                using (StreamWriter writer = new StreamWriter(filePath)) {
                     // Write the data to the file
                     writer.WriteLine(dataToSave);
-                   
-                  return true;
+
+                    return true;
                 }
-            }
-            catch (Exception ex)
-            {
-               MessageBox.Show ($"An error occurred: {ex.Message}");
+            } catch (Exception ex) {
+                MessageBox.Show($"An error occurred: {ex.Message}");
                 return false;
             }
 
         }
 
-        public static bool GetStoredCredential(ref string Username, ref string Password)
-        {
+        public static bool GetStoredCredential(ref string Username, ref string Password) {
+
             //this will get the stored username and password and will return true if found and false if not found.
-            try
-            {
-                //gets the current project's directory
+            try {
                 string currentDirectory = System.IO.Directory.GetCurrentDirectory();
 
-                // Path for the file that contains the credential.
-                string filePath  = currentDirectory + "\\data.txt";
+                string filePath = currentDirectory + "\\data.txt";
 
-                // Check if the file exists before attempting to read it
-                if (File.Exists(filePath))
-                {
-                    // Create a StreamReader to read from the file
-                    using (StreamReader reader = new StreamReader(filePath))
-                    {
-                        // Read data line by line until the end of the file
+                if (File.Exists(filePath)) {
+                    using (StreamReader reader = new StreamReader(filePath)) {
+
                         string line;
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            Console.WriteLine(line); // Output each line of data to the console
+                        while ((line = reader.ReadLine()) != null) {
+                            Console.WriteLine(line);
                             string[] result = line.Split(new string[] { "#//#" }, StringSplitOptions.None);
 
                             Username = result[0];
@@ -83,18 +66,16 @@ namespace DVLD.Classes
                         }
                         return true;
                     }
-                }
-                else
-                {
+                } else
                     return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show ($"An error occurred: {ex.Message}");
-                return false;   
+
+            } catch (Exception ex) {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+                return false;
             }
 
         }
+
+
     }
 }

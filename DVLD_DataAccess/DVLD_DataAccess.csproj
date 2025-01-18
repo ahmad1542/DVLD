@@ -43,23 +43,8 @@
   <ItemGroup>
     <Compile Include="ApplicationData.cs" />
     <Compile Include="ApplicationTypeData.cs" />
-    <Compile Include="clsDetainedLicense.cs" />
-    <Compile Include="clsDriver.cs" />
-    <Compile Include="clsInternationalLicense.cs" />
-    <Compile Include="clsLicense.cs" />
-    <Compile Include="clsTestAppointment.cs" />
-    <Compile Include="clsTest.cs" />
-    <Compile Include="clsTestType.cs" />
-    <Compile Include="clsLocalDrivingLicenseApplicationData.cs" />
     <Compile Include="CountryData.cs" />
     <Compile Include="DataAccessSettings.cs" />
-    <Compile Include="clsLicenseClassData.cs" />
-    <Compile Include="clsApplication.cs" />
-    <Compile Include="clsApplicationType.cs" />
-    <Compile Include="clsDataAccessSettings.cs" />
-    <Compile Include="clsUserData.cs" />
-    <Compile Include="clsPersonData.cs" />
-    <Compile Include="clsCountryData.cs" />
     <Compile Include="DetainedLicenseData.cs" />
     <Compile Include="DriverData.cs" />
     <Compile Include="InternationalLicenseData.cs" />

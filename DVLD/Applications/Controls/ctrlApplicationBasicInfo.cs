@@ -12,40 +12,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DVLD.Controls.ApplicationControls
-{
-    public partial class ctrlApplicationBasicInfo : UserControl
-    {
+namespace DVLD.Controls.ApplicationControls {
+    public partial class ctrlApplicationBasicInfo : UserControl {
 
         private DVLD_Buisness.Application _Application;
 
         private int _ApplicationID = -1;
 
-        public int ApplicationID
-        {
+        public int ApplicationID {
             get { return _ApplicationID; }
         }
 
-        public ctrlApplicationBasicInfo()
-        {
+        public ctrlApplicationBasicInfo() {
             InitializeComponent();
-  
+
         }
 
-        public void LoadApplicationInfo(int ApplicationID)
-        {
+        public void LoadApplicationInfo(int ApplicationID) {
             _Application = DVLD_Buisness.Application.FindBaseApplication(ApplicationID);
-            if (_Application == null)
-            {
+            if (_Application == null) {
                 ResetApplicationInfo();
                 MessageBox.Show("No Application with ApplicationID = " + ApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
+            } else
                 _FillApplicationInfo();
         }
 
-        private void _FillApplicationInfo()
-        {
+        private void _FillApplicationInfo() {
             _ApplicationID = _Application.ApplicationID;
             lblApplicationID.Text = _Application.ApplicationID.ToString();
             lblStatus.Text = _Application.StatusText;
@@ -57,8 +49,7 @@ namespace DVLD.Controls.ApplicationControls
             lblCreatedByUser.Text = _Application.CreatedByUserInfo.UserName;
         }
 
-        public void ResetApplicationInfo()
-        {
+        public void ResetApplicationInfo() {
             _ApplicationID = -1;
 
             lblApplicationID.Text = "[????]";
@@ -72,14 +63,11 @@ namespace DVLD.Controls.ApplicationControls
 
         }
 
-        private void llViewPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
+        private void llViewPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             frmShowPersonInfo frm = new frmShowPersonInfo(_Application.ApplicantPersonID);
             frm.ShowDialog();
 
-            //Refresh
-            LoadApplicationInfo(_ApplicationID);
-
+            LoadApplicationInfo(_ApplicationID);//this to refresh the window
         }
     }
 }

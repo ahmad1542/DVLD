@@ -13,57 +13,47 @@ using System.Xml.Linq;
 using System.IO;
 using DVLD.People;
 
-namespace DVLD.Controls
-{
-    public partial class ctrlPersonCard : UserControl
-    {
+namespace DVLD.Controls {
+    public partial class ctrlPersonCard : UserControl {
         private Person _Person;
 
-        private int  _PersonID=-1;
+        private int _PersonID = -1;
 
-        public int PersonID   
-        {
-            get { return _PersonID; }   
+        public int PersonID {
+            get { return _PersonID; }
         }
 
-        public Person SelectedPersonInfo
-        {
+        public Person SelectedPersonInfo {
             get { return _Person; }
         }
 
-        public ctrlPersonCard()
-        {
+        public ctrlPersonCard() {
             InitializeComponent();
         }
 
-        public void LoadPersonInfo(int PersonID)
-        {
-            _Person=Person.Find(PersonID);
-            if (_Person == null)
-            {
+        public void LoadPersonInfo(int PersonID) {
+            _Person = Person.Find(PersonID);
+            if (_Person == null) {
                 ResetPersonInfo();
                 MessageBox.Show("No Person with PersonID = " + PersonID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-           
-                _FillPersonInfo();
+
+            _FillPersonInfo();
         }
 
-        public void LoadPersonInfo(string NationalNo)
-        {
+        public void LoadPersonInfo(string NationalNo) {
             _Person = Person.Find(NationalNo);
-            if (_Person == null)
-            {
+            if (_Person == null) {
                 ResetPersonInfo();
                 MessageBox.Show("No Person with National No. = " + NationalNo.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-             _FillPersonInfo();
+
+            _FillPersonInfo();
         }
 
-        private void _LoadPersonImage()
-        {
+        private void _LoadPersonImage() {
             if (_Person.Gender == 0)
                 pbPersonImage.Image = Resources.Male_512;
             else
@@ -72,34 +62,29 @@ namespace DVLD.Controls
             string ImagePath = _Person.ImagePath;
             if (ImagePath != "")
                 if (File.Exists(ImagePath))
-                    pbPersonImage.ImageLocation= ImagePath;
+                    pbPersonImage.ImageLocation = ImagePath;
                 else
-                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Could not find this image: " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
-        private void _FillPersonInfo()
-        {
+        private void _FillPersonInfo() {
             llEditPersonInfo.Enabled = true;
             _PersonID = _Person.PersonID;
-            lblPersonID.Text=_Person.PersonID.ToString();
+            lblPersonID.Text = _Person.PersonID.ToString();
             lblNationalNo.Text = _Person.NationalNo;
             lblFullName.Text = _Person.FullName;
             lblGendor.Text = _Person.Gender == 0 ? "Male" : "Female";
             lblEmail.Text = _Person.Email;
             lblPhone.Text = _Person.Phone;
             lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            lblCountry.Text= Country.Find( _Person.NationalityCountryID).CountryName ;
-            lblAddress.Text= _Person.Address;
+            lblCountry.Text = Country.Find(_Person.NationalityCountryID).CountryName;
+            lblAddress.Text = _Person.Address;
             _LoadPersonImage();
-
-           
-
 
         }
 
-        public void ResetPersonInfo()
-        {
+        public void ResetPersonInfo() {
             _PersonID = -1;
             lblPersonID.Text = "[????]";
             lblNationalNo.Text = "[????]";
@@ -112,18 +97,16 @@ namespace DVLD.Controls
             lblCountry.Text = "[????]";
             lblAddress.Text = "[????]";
             pbPersonImage.Image = Resources.Male_512;
-        
+
         }
 
-        private void llEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            frmAddUpdatePerson frm = new frmAddUpdatePerson( _PersonID );
+        private void llEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            frmAddUpdatePerson frm = new frmAddUpdatePerson(_PersonID);
             frm.ShowDialog();
 
-            //refresh
             LoadPersonInfo(_PersonID);
         }
 
-        
+
     }
 }

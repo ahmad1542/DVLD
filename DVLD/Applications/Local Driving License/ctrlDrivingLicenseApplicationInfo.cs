@@ -13,10 +13,8 @@ using static System.Net.Mime.MediaTypeNames;
 using DVLD.Tests;
 using DVLD.DriverLicense;
 
-namespace DVLD.Controls.ApplicationControls
-{
-    public partial class ctrlDrivingLicenseApplicationInfo: UserControl
-    {
+namespace DVLD.Controls.ApplicationControls {
+    public partial class ctrlDrivingLicenseApplicationInfo : UserControl {
 
         private LocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
@@ -24,73 +22,60 @@ namespace DVLD.Controls.ApplicationControls
 
         private int _LicenseID;
 
-        public int LocalDrivingLicenseApplicationID
-        {
+        public int LocalDrivingLicenseApplicationID {
             get { return _LocalDrivingLicenseApplicationID; }
         }
 
-        public ctrlDrivingLicenseApplicationInfo()
-        {
+        public ctrlDrivingLicenseApplicationInfo() {
             InitializeComponent();
         }
 
-        public void LoadApplicationInfoByLocalDrivingAppID(int LocalDrivingLicenseApplicationID)
-        {
+        public void LoadApplicationInfoByLocalDrivingAppID(int LocalDrivingLicenseApplicationID) {
             _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
-            if (_LocalDrivingLicenseApplication == null)
-            {
+            if (_LocalDrivingLicenseApplication == null) {
                 _ResetLocalDrivingLicenseApplicationInfo();
-                
+
 
                 MessageBox.Show("No Application with ApplicationID = " + LocalDrivingLicenseApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-              
-                _FillLocalDrivingLicenseApplicationInfo();
+
+            _FillLocalDrivingLicenseApplicationInfo();
         }
 
-        public void LoadApplicationInfoByApplicationID(int ApplicationID)
-        {
+        public void LoadApplicationInfoByApplicationID(int ApplicationID) {
             _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication.FindByApplicationID(ApplicationID);
-            if (_LocalDrivingLicenseApplication == null)
-            {
+            if (_LocalDrivingLicenseApplication == null) {
                 _ResetLocalDrivingLicenseApplicationInfo();
-
 
                 MessageBox.Show("No Application with ApplicationID = " + LocalDrivingLicenseApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-         
-                _FillLocalDrivingLicenseApplicationInfo();
+
+            _FillLocalDrivingLicenseApplicationInfo();
         }
 
-        private void _FillLocalDrivingLicenseApplicationInfo()
-        {
+        private void _FillLocalDrivingLicenseApplicationInfo() {
             _LicenseID = _LocalDrivingLicenseApplication.GetActiveLicenseID();
-           
-            //incase there is license enable the show link.
+
             llShowLicenceInfo.Enabled = (_LicenseID != -1);
 
-           
+
             lblLocalDrivingLicenseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
-            lblAppliedFor.Text = LicenseClass.Find( _LocalDrivingLicenseApplication.LicenseClassID).ClassName ;
-            lblPassedTests.Text = _LocalDrivingLicenseApplication.GetPassedTestCount().ToString() +"/3" ; 
+            lblAppliedFor.Text = LicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName;
+            lblPassedTests.Text = _LocalDrivingLicenseApplication.GetPassedTestCount().ToString() + "/3";
             ctrlApplicationBasicInfo1.LoadApplicationInfo(_LocalDrivingLicenseApplication.ApplicationID);
 
         }
 
-        private void _ResetLocalDrivingLicenseApplicationInfo()
-        {
+        private void _ResetLocalDrivingLicenseApplicationInfo() {
             _LocalDrivingLicenseApplicationID = -1;
             ctrlApplicationBasicInfo1.ResetApplicationInfo();
             lblLocalDrivingLicenseApplicationID.Text = "[????]";
             lblAppliedFor.Text = "[????]";
-
-
         }
 
-        private void llShowLicenceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
+        private void llShowLicenceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             frmShowLicenseInfo frm = new frmShowLicenseInfo(_LocalDrivingLicenseApplication.GetActiveLicenseID());
             frm.ShowDialog();
 

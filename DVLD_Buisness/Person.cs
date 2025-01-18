@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using DVLD_DataAccess;
-using static DVLD_DataAccess.clsCountryData;
+using static DVLD_DataAccess.CountryData;
 
 namespace DVLD_Buisness {
     public class Person {

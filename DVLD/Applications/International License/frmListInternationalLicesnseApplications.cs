@@ -14,32 +14,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace DVLD.Applications.International_License
-{
-    public partial class frmListInternationalLicesnseApplications : Form
-    {
+namespace DVLD.Applications.International_License {
+    public partial class frmListInternationalLicesnseApplications : Form {
         private DataTable _dtInternationalLicenseApplications;
 
-        public frmListInternationalLicesnseApplications()
-        {
+        public frmListInternationalLicesnseApplications() {
             InitializeComponent();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
+        private void btnClose_Click(object sender, EventArgs e) {
             this.Close();
         }
 
-        private void frmListInternationalLicesnseApplications_Load(object sender, EventArgs e)
-        {
+        private void frmListInternationalLicesnseApplications_Load(object sender, EventArgs e) {
             _dtInternationalLicenseApplications = InternationalLicense.GetAllInternationalLicenses();
-            cbFilterBy.SelectedIndex= 0;
+            cbFilterBy.SelectedIndex = 0;
 
             dgvInternationalLicenses.DataSource = _dtInternationalLicenseApplications;
-                   lblInternationalLicensesRecords.Text = dgvInternationalLicenses.Rows.Count.ToString();
+            lblInternationalLicensesRecords.Text = dgvInternationalLicenses.Rows.Count.ToString();
 
-            if (dgvInternationalLicenses.Rows.Count > 0)
-            {
+            if (dgvInternationalLicenses.Rows.Count > 0) {
                 dgvInternationalLicenses.Columns[0].HeaderText = "Int.License ID";
                 dgvInternationalLicenses.Columns[0].Width = 160;
 
@@ -64,35 +58,28 @@ namespace DVLD.Applications.International_License
             }
         }
 
-        private void btnNewApplication_Click(object sender, EventArgs e)
-        {
+        private void btnNewApplication_Click(object sender, EventArgs e) {
             frmNewInternationalLicenseApplication frm = new frmNewInternationalLicenseApplication();
             frm.ShowDialog();
-            //refresh
-            frmListInternationalLicesnseApplications_Load(null,null);
 
+            frmListInternationalLicesnseApplications_Load(null, null);
         }
 
-        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e) {
             int InternationalLicenseID = (int)dgvInternationalLicenses.CurrentRow.Cells[0].Value;
             frmShowInternationalLicenseInfo frm = new frmShowInternationalLicenseInfo(InternationalLicenseID);
             frm.ShowDialog();
         }
 
-        private void PesonDetailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+        private void PersonDetailsToolStripMenuItem_Click(object sender, EventArgs e) {
             int DriverID = (int)dgvInternationalLicenses.CurrentRow.Cells[2].Value;
             int PersonID = Driver.FindByDriverID(DriverID).PersonID;
 
             frmShowPersonInfo frm = new frmShowPersonInfo(PersonID);
             frm.ShowDialog();
-
         }
 
-        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e) {
             int DriverID = (int)dgvInternationalLicenses.CurrentRow.Cells[2].Value;
             int PersonID = Driver.FindByDriverID(DriverID).PersonID;
             frmShowPersonLicenseHistory frm = new frmShowPersonLicenseHistory(PersonID);
@@ -100,31 +87,23 @@ namespace DVLD.Applications.International_License
 
         }
 
-        private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbFilterBy.Text == "Is Active")
-            {
+        private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cbFilterBy.Text == "Is Active") {
                 txtFilterValue.Visible = false;
                 cbIsReleased.Visible = true;
                 cbIsReleased.Focus();
                 cbIsReleased.SelectedIndex = 0;
-            }
-
-            else
-
-            {
+            } else {
 
                 txtFilterValue.Visible = (cbFilterBy.Text != "None");
                 cbIsReleased.Visible = false;
 
-                if (cbFilterBy.Text == "None")
-                {
+                if (cbFilterBy.Text == "None") {
                     txtFilterValue.Enabled = false;
                     //_dtDetainedLicenses.DefaultView.RowFilter = "";
                     //lblTotalRecords.Text = dgvDetainedLicenses.Rows.Count.ToString();
 
-                }
-                else
+                } else
                     txtFilterValue.Enabled = true;
 
                 txtFilterValue.Text = "";
@@ -132,13 +111,11 @@ namespace DVLD.Applications.International_License
             }
         }
 
-        private void cbIsReleased_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void cbIsReleased_SelectedIndexChanged(object sender, EventArgs e) {
             string FilterColumn = "IsActive";
-            string FilterValue = cbIsReleased.Text;
+            string FilterValue = cbIsReleased.Text; 
 
-            switch (FilterValue)
-            {
+            switch (FilterValue) {
                 case "All":
                     break;
                 case "Yes":
@@ -153,28 +130,22 @@ namespace DVLD.Applications.International_License
             if (FilterValue == "All")
                 _dtInternationalLicenseApplications.DefaultView.RowFilter = "";
             else
-                //in this case we deal with numbers not string.
                 _dtInternationalLicenseApplications.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, FilterValue);
 
             lblInternationalLicensesRecords.Text = _dtInternationalLicenseApplications.Rows.Count.ToString();
         }
 
-        private void txtFilterValue_TextChanged(object sender, EventArgs e)
-        {
-          
+        private void txtFilterValue_TextChanged(object sender, EventArgs e) {
 
             string FilterColumn = "";
-            //Map Selected Filter to real Column name 
-            switch (cbFilterBy.Text)
-            {
+            //this to change selected filter to real column name 
+            switch (cbFilterBy.Text) {
                 case "International License ID":
                     FilterColumn = "InternationalLicenseID";
                     break;
                 case "Application ID":
-                    {
                         FilterColumn = "ApplicationID";
                         break;
-                    };
 
                 case "Driver ID":
                     FilterColumn = "DriverID";
@@ -194,27 +165,21 @@ namespace DVLD.Applications.International_License
                     break;
             }
 
-
-            //Reset the filters in case nothing selected or filter value conains nothing.
-            if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
-            {
+            if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None") {
                 _dtInternationalLicenseApplications.DefaultView.RowFilter = "";
                 lblInternationalLicensesRecords.Text = dgvInternationalLicenses.Rows.Count.ToString();
                 return;
             }
 
-
-          
             _dtInternationalLicenseApplications.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
-           
+
             lblInternationalLicensesRecords.Text = _dtInternationalLicenseApplications.Rows.Count.ToString();
         }
 
-        private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //we allow numbers only becasue all fiters are numbers.
-                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-
+        private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e) {
+            //I allowed only numbers because all filters are numbers
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+
     }
 }

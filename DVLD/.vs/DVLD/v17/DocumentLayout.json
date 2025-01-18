@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\GitHub Repositories\\DVLD\\DVLD\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A65E342-BF9D-4ABF-856F-3F4F7F7D3CE5}|DVLD.csproj|d:\\github repositories\\dvld\\dvld\\people\\frmaddupdateperson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A65E342-BF9D-4ABF-856F-3F4F7F7D3CE5}|DVLD.csproj|solutionrelative:people\\frmaddupdateperson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A65E342-BF9D-4ABF-856F-3F4F7F7D3CE5}|DVLD.csproj|d:\\github repositories\\dvld\\dvld\\people\\frmaddupdateperson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7A65E342-BF9D-4ABF-856F-3F4F7F7D3CE5}|DVLD.csproj|solutionrelative:people\\frmaddupdateperson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 249,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +27,31 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmAddUpdatePerson.cs",
+              "DocumentMoniker": "D:\\GitHub Repositories\\DVLD\\DVLD\\People\\frmAddUpdatePerson.cs",
+              "RelativeDocumentMoniker": "People\\frmAddUpdatePerson.cs",
+              "ToolTip": "D:\\GitHub Repositories\\DVLD\\DVLD\\People\\frmAddUpdatePerson.cs",
+              "RelativeToolTip": "People\\frmAddUpdatePerson.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-18T18:24:14.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmAddUpdatePerson.cs [Design]",
+              "DocumentMoniker": "D:\\GitHub Repositories\\DVLD\\DVLD\\People\\frmAddUpdatePerson.cs",
+              "RelativeDocumentMoniker": "People\\frmAddUpdatePerson.cs",
+              "ToolTip": "D:\\GitHub Repositories\\DVLD\\DVLD\\People\\frmAddUpdatePerson.cs [Design]",
+              "RelativeToolTip": "People\\frmAddUpdatePerson.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-18T18:24:12.682Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
